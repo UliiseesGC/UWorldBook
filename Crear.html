@@ -1,0 +1,141 @@
+<div class="page fondo5" data-name="Crear">
+  <div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner sliding centro navbarrr">
+      <div class="title" style="margin-top: 4%; color: burlywood;">¡Crea tu primer libro!</div>
+    </div>
+  </div>
+    <!-- AGREGAMOS EL MENU DE OPCIONES DEL FOOTER -->
+    <div class="toolbar toolbar-bottom tabbarr">
+      <div class="toolbar-inner centro2">
+        <a href="#" class="btntabbar" data-view=".page-content" id="inicio1"> <button class="col button">
+          <img class="" src="img/home.png">
+        </button></a>
+        <a href="#" class="btntabbar" data-view=".page-content" id="crelib"><button class="col button btnmenu">
+          <img class="" src="img/historia.png">
+        </button></a>
+        <a href="#" class="btntabbar" data-view=".page-content" id="tubiblio1"><button class="col button">
+          <img class="" src="img/libro.png">
+        </button></a>
+        <a href="#" class="btntabbar panel-open" data-panel=".panel-right-1"><button class="col button" >
+          <img class="" src="img/configuraciones.png">
+        </button></a>
+      </div>
+    </div>
+  <div class="page-content">
+    <div class="row centro">
+      <div class="col-60 paletcolor4 ">
+          <div class="col centro">
+            <div id="maslib" class="button button-outline btn1 ">Agregar un libro</div>
+            <div id="verlib" class="row novisible centro">
+              <div class="col-20">
+                <input id="nomlib" type="text" placeholder="Nombre del Libro">
+                <div id="nomlib2" class="button button-outline btn10 "></div>
+                <div id="noverlib" class="button button-outline btn12 "></div>
+              </div>
+            </div> 
+            <div id="lista3" class="novisible">
+            </div>
+          </div>
+          <div class="col centro">
+            <div id="mascap" class="button button-outline btn1 ">Agregar Capitulo</div>
+            <div id="vercap" class="row novisible centro">
+              <div class="col-20">
+                <input id="nomcap" type="text" placeholder="Nombre del Capitulo">
+                <div id="nomcap2" class="button button-outline btn10 "></div>
+                <div id="novercap" class="button button-outline btn12 "></div>
+              </div>
+            </div>
+            <div id="lista2" class="novisible">
+              <!-- <select value="0" id="lista">
+                <option> </option>
+              </select> -->
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content card-content-padding">
+                <div class="block-title"><h2 id="tulibro"></h2></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content card-content-padding">
+              <div class="block-title"><h2 id="tucapitulo"></h2></div>
+            </div>
+          </div>
+          <div id="textolibb" class="row centro ">
+            <div class="text-editor text-editor-init" data-placeholder="Enter text...">
+            <div id="pagcrea" class="text-editor-content" contenteditable>
+            </div>
+          </div>
+            <div  id="vis" data-popup=".my-popup" class="button button-outline btn1 ">Pre-visualizar</div>
+          </div>
+      </div>
+    </div>
+    <div class="row centro paletcolor4">
+      <div class="col-50 ">
+        <div id="titulo" class="block-title"></div>
+        <div class="swiper-container swiper-init demo-swiper">
+          <div id="ps" class="swiper-wrapper">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- PAGINA TERMINADA -->
+  <!-- HASTA ACA -->
+    <!-- ESTO ES PARA EL MENO DE OPCIONES -->
+    <div class="row centro">
+      <div class="col-50">
+            <div id="app">
+              <div class="panel panel-righ panel-reveal panel-resizable panel-init">
+                <div class="block">
+                  <p>¡Hola!</p>
+                    <a class="button button-fill " href="#" data-view=".page-content" id="perfil">Ir al Perfil</a>
+                    <a class="button button-fill " href="#" data-view=".page-content" id="opciones">Opciones</a>
+                    <a class="button button-fill " href="#" data-view=".page-content" id="inicio2">¿Necesitas ayuda?</a>
+                    <p><a class="panel-close" href="#">Cerrar</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ESTO ES EL POPUP DE PREVISUALIZAR -->
+          <div class="popup my-popup">
+            <div class="view">
+              <div class="page paletcolor3">
+              <div class="navbar">
+                  <div class="navbar-bg"></div>
+              <div class="navbar-inner">
+                  <div class="right text-color-white">
+                      <!-- Link to close popup -->
+                      <a class="link popup-close icon f7-icons color-black">xmark_circle</a>
+                  </div>
+              </div>
+              </div>
+              <div class="page-content text-align-center paletcolor3">
+                <div class="block">
+                  <div class="row centro">
+                    <div id="previs" class="col-50 paletcolor4">
+                      <div class="block-title">¡Pre-visualizacion de tu pagina!</div>
+                      <div id="quelib" class="block-title">Libro: </div>
+                      <div id="quecap" class="block-title">Capitulo: </div>
+                      
+                      <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                          <div id="pre1" class="swiper-slide paletcolor4">Slide 1</div>
+                        </div>
+                        <div id="maspag" class="button button-outline btn ">Agregar Pagina</div>
+                    </div>
+              </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+</div>
+
+
+
+

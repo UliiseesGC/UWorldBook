@@ -1,0 +1,184 @@
+<div class="page Iniciopag" data-name="Crear">
+  <script>
+    export default (props, { $update }) => {
+      let selected = "home";
+      let selectedMedia = "home";
+
+      const setItem = (newItem) => {
+        selected = newItem;
+        $update();
+      };
+      const setItemMedia = (newItem) => {
+        selectedMedia = newItem;
+        $update();
+      };
+      return $render;
+    };
+  </script>
+
+  <!-- AGREGAMOS EL MENU DE OPCIONES DEL FOOTER -->
+  <div class="toolbar toolbar-bottom text-align-center">
+    <div class="row">
+      <div class="col-20"></div>
+      <div class="col-50 centro">
+        <div class="menu">
+          <div class="menu-inner">
+            <a
+              href="#"
+              class="menu-item"
+              data-view=".page-content"
+              id="inicio1"
+            >
+              <div class="menu-item-content">Inicio</div>
+            </a>
+            <a href="#" class="menu-item" data-view=".page-content" id="crelib">
+              <div class="menu-item-content">¡Crea tu libro!</div>
+            </a>
+            <a
+              href="#"
+              class="menu-item"
+              data-view=".page-content"
+              id="tendencia1"
+            >
+              <div class="menu-item-content">★</div>
+            </a>
+            <a href="#" class="menu-item" data-view=".page-content" id="amigo1">
+              <div class="menu-item-content">Amigos</div>
+            </a>
+            <a
+              href="#"
+              class="menu-item"
+              data-view=".page-content"
+              id="mensajeria1"
+            >
+              <div class="menu-item-content">Mensajeria</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-10 derecha">
+        <div id="app">
+          <div class="menu">
+            <div class="menu-inner">
+              <a
+                href="#"
+                class="menu-item panel-open"
+                data-panel=".panel-right-1"
+              >
+                <div class="menu-item-content">opc</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="block-title col-50 centro">¡Arma tu libro!</div>
+          <div class="col centro">
+            <div class="block-title centro">¡Agrega capitulos!</div>
+            <div class="menu">
+              <div class="menu-inner">
+                <div class="menu-item menu-item-dropdown">
+                  <div class="menu-item-content">Selecciona un capitulo</div>
+                  <div class="menu-dropdown menu-dropdown-center">
+                    <div class="menu-dropdown-content">
+                      <a class="menu-dropdown-link menu-close">Menu Item 1</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="mascap" class="button button-fill btn1">
+              Agregar Capitulo
+            </div>
+          </div>
+          <div class="col centro">
+            <div class="menu">
+              <div class="block-title centro">
+                Agrega o selecciona tu pagina
+              </div>
+              <div class="menu-inner">
+                <div class="menu-item menu-item-dropdown">
+                  <div class="menu-item-content">Pagina</div>
+                  <div class="menu-dropdown menu-dropdown-center">
+                    <div class="menu-dropdown-content">
+                      <a
+                        id="nropag1"
+                        val="1"
+                        class="menu-dropdown-link menu-close"
+                        >Menu Item 1</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="block-title">¡Escribe tu pagina!</div>
+          <div
+            class="text-editor text-editor-init"
+            data-placeholder="Enter text..."
+          >
+            <div id="pagcrea" class="text-editor-content" contenteditable></div>
+          </div>
+          <a id="vis" class="button button-fill btn1" href="#"
+            >Visualizar pagina</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row centro">
+      <div class="col-50 paletcolor1">
+        <div class="block-title">¡Pre-visualizacion de tu pagina!</div>
+        <div id="nrocapp" class="block-title"></div>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div id="pre1" class="swiper-slide paletcolor2">Slide 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ESTO ES PARA EL MENO DE OPCIONES -->
+    <div class="row centro">
+      <div class="col-50">
+        <div id="app">
+          <div class="panel panel-righ panel-reveal panel-resizable panel-init">
+            <div class="block">
+              <p>¡Hola!</p>
+              <a
+                class="button button-fill"
+                href="#"
+                data-view=".page-content"
+                id="perfil"
+                >Ir al Perfil</a
+              >
+              <a
+                class="button button-fill"
+                href="#"
+                data-view=".page-content"
+                id="opciones"
+                >Opciones</a
+              >
+              <a
+                class="button button-fill"
+                href="#"
+                data-view=".page-content"
+                id="inicio2"
+                >¿Necesitas ayuda?</a
+              >
+              <p><a class="panel-close" href="#">Cerrar</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

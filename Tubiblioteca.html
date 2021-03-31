@@ -1,0 +1,254 @@
+<div class="page fondo4" data-name="Tubiblioteca">
+  <div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner sliding">
+      <div class="title">UWorldBook</div>
+      <div class="subnavbar">
+        <div class="subnavbar-inner">
+          <div class="segmented segmented-strong">
+            <a class="button tab-link tab-link-active" href="#tab1">Tu Biblioteca</a>
+            <a class="button tab-link" id="buscar" >Biblioteca General</a>
+            <span class="segmented-highlight"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- AGREGAMOS EL MENU DE OPCIONES DEL FOOTER -->
+    <div class="toolbar toolbar-bottom tabbarr">
+      <div class="toolbar-inner centro2">
+        <a href="#" class="btntabbar" data-view=".page-content" id="inicio1"> <button class="col button ">
+          <img class="" src="img/home.png">
+        </button></a>
+        <a href="#" class="btntabbar" data-view=".page-content" id="crelib"><button class="col button">
+          <img class="" src="img/historia.png">
+        </button></a>
+        <a href="#" class="btntabbar" data-view=".page-content" id="tubiblio1"><button class="col button btnmenu">
+          <img class="" src="img/libro.png">
+        </button></a>
+        <div class="btntabbar panel-open" data-panel=".panel-right-1">
+          <button class="col button">
+            <img class="" src="img/configuraciones.png">
+          </button>
+        </div>
+      </div>
+    </div>
+  <!-- HASTA ACA MENU OPCIONES -->
+  
+  <!-- ACA VAN LAS CARDS CREADAS -->
+
+      <div class="page-content hide-navbar-on-scroll">
+        <div class="tabs">
+          <div class="tab tab-active" id="tab1">
+            <div class="block">
+              <div class="row">
+                <div class="col centro">
+                  <div id="crearcard" class="">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab" id="tab2">
+
+            <div class="block">
+              
+              <div class="row">
+                <div class="col-80 centro">
+                  <div class="navbar">
+                    <div class="navbar-bg"></div>
+                    <div class="navbar-inner sliding">
+                      <div class="title">UWorldBook</div>
+                    </div>
+                  </div>
+                  <div class="subnavbar">
+                    <form class="searchbar">
+                      <div class="searchbar-inner">
+                        <div class="searchbar-input-wrap">
+                          <input type="search" placeholder="Search" />
+                          <i class="searchbar-icon"></i>
+                          <span class="input-clear-button"></span>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                
+                  <div class="page-content">
+                    <div class="row centro">
+                        <div class="col-60">
+                          <div class="searchbar-backdrop"></div>
+                          <div class="block searchbar-hide-on-search">
+                            <p>This block will be hidden on search. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                          </div>
+                          <div class="list searchbar-found">
+                            <div id="buscadora">
+                              <ul id="buscarlib" >
+            
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="block searchbar-not-found">
+                            <div class="block-inner">Nothing found</div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="popup my-popup">
+          <div class="view">
+            <div class="page">
+              <div class="navbar">
+                <div class="navbar-bg"></div>
+              <div class="navbar-inner">
+                  <div class="right text-color-white">
+                      <a class="link popup-close icon f7-icons color-black">xmark_circle</a>
+                  </div>
+              </div>
+            </div>
+              <div class="page-content text-align-center">
+                <div class="block">
+                  <div class="row centro"> 
+                    <div class="block block-title">¡Agrega un capitulo a tu libro!</div>
+                    <div id="quelib3" class="block-title">Libro: </div>        
+                    <input id="quecap3" type="text" placeholder="Ingrese el nombre del cap...">
+                    <div class="text-editor text-editor-init">
+                      <div id="pageditt3"class="text-editor-content fijo" contenteditable>
+                        
+                      </div>
+                    </div>
+                    <div id="agnuevoc" class="button button-fill btn1">¡Agregar!</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ESTO ES PARA EL POPOVER DE PUBLICO O NO -->
+        <div class="popover popover-about">
+          <div class="popover-inner">
+            <div class="block">
+              <p id="publiclib"></p>
+              <p>
+                ¿Quieres hacer publico o privado tu libro? 
+                - Si es publico, todos/as podran leer tu libro por mas que este incompleto.
+                - Si es privado nadie lo podra ver.
+              </p>
+              <div id="publicno" class="button button-fill">Privado</div>
+              <div id="publicsi" class="button button-fill">Publico</div>
+            </div>
+          </div>
+        </div>
+
+                    <!-- ESTO ES EL POPUP DE LOS LIBROS -->
+                    <div class="popup otropopup">
+                      <div class="view">
+                        <div class="page">
+                          <div class="navbar">
+                              <div class="navbar-bg"></div>
+                            <div class="navbar-inner">
+                                <div class="right text-color-white">
+                                    <a class="link popup-close icon f7-icons color-black">xmark_circle</a>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="page-content text-align-center">
+                            <div class="block">
+                              <div class="row centro">
+                                <div class="block-title">¡Este es tu Libro!</div>                 
+                                <div id="previs" class="col-50 ">
+                                  <div class="">
+                                    <div class="">
+                                      <h1><div id="estelib" class=" block block-title visible"></div></h1>
+                                      <div class="block block-title"><h3>¡Seleccione un capitulo! </h3></div>
+                                      <div class="list menu-list">
+                                        <ul id="xx">
+                                          
+                                        </ul>
+                                      </div>
+                                      <h2><div id="estecap" class=" block block-title visible"></div></h2>
+                                      <div id="btnlee" class="button button-fill btn1">Leer</div>
+                                      <div id="leercap" class=" paletcolor2"></div>
+                                      <div id="btnedit" class="button button-fill btn1">Editar</div>
+                                      <div id="editp" class="text-editor text-editor-init novisible" data-placeholder="Enter text...">
+                                        <div id="pageditt2"class="text-editor-content" contenteditable>
+                                          
+                                        </div>
+                                      </div>
+                                      <div id="editp2" class="button button-fill btn1 fijo novisible">Cancelar</div>
+                                      <div id="editp3" class="button button-fill btn1 fijo novisible">Guardar cambios</div>
+                                      <div id="btnborrar" class="button button-fill btn1 ">Borrar</div>      
+                                        <div id="borrarl" class="novisible button button-fill btn1 red">Borrar libro</div>
+                                        <div id="borrarc" class="novisible button button-fill btn1 red">Borrar capitulo</div>                              
+                                        <div id="cancelarb" class="novisible button button-fill btn1 azulm">Cancelar</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+      </div>
+      <!-- ESTO ES PARA EL MENO DE OPCIONES -->
+      <div class="row centro">
+          <div class="col-50">
+                <div id="app">
+                  <div class="panel panel-righ panel-reveal panel-resizable panel-init">
+                    <div class="block">
+                        <p>¡Hola!</p>
+                        <a class="button button-fill " href="#" data-view=".page-content" id="perfil">Ir al Perfil</a>
+                        <a class="button button-fill " href="#" data-view=".page-content" id="opciones">Opciones</a>
+                        <a class="button button-fill " href="#" data-view=".page-content" id="inicio2">¿Necesitas ayuda?</a>
+                        <p><a class="panel-close" href="#">Cerrar</a></p>
+                    </div>
+                  </div>
+                </div>
+          </div>
+      </div>
+      <div class="row centro">
+        <div class="col-50">
+          <div id="app">
+            <div
+              class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init"
+            >
+              <div class="block">
+                <p>¡Hola!</p>
+                <a
+                  class="button button-outline btn2 btntabbar"
+                  href="#"
+                  data-view=".page-content"
+                  id="perfil"
+                  >Ir al Perfil</a
+                >
+                <a
+                  class="button button-outline btn2 btntabbar"
+                  href="#"
+                  data-view=".page-content"
+                  id="inicio2"
+                  >¿Necesitas ayuda?</a
+                >
+                <p><a class="panel-close" href="#">Cerrar</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+

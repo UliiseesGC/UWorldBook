@@ -1,0 +1,305 @@
+<div class="page fondo5" data-name="inicio">
+  <div class="navbar navbarr">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner sliding navbarrr">
+      <div class="title">UWorldBook</div>
+    </div>
+  </div>
+
+  <!-- AGREGAMOS EL MENU DE OPCIONES DEL FOOTER -->
+  <div class="toolbar toolbar-bottom tabbarr">
+    <div class="toolbar-inner centro2">
+      <a href="#" class="btntabbar" data-view=".page-content" id="inicio1"> <button class="col button btnmenu">
+        <img class="" src="img/home.png">
+      </button></a>
+      <a href="#" class="btntabbar" data-view=".page-content" id="crelib"><button class="col button">
+        <img class="" src="img/historia.png">
+      </button></a>
+      <a href="#" class="btntabbar" data-view=".page-content" id="tubiblio1"><button class="col button">
+        <img class="" src="img/libro.png">
+      </button></a>
+      <div class="btntabbar panel-open" data-panel=".panel-right-1">
+        <button class="col button">
+          <img class="" src="img/configuraciones.png">
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- HASTA ACA MENU OPCIONES -->
+  <body>
+  <div class="page-content">
+    <div class="row">
+      <div class="list menu-list fijoscroll">
+        <ul style="border-radius: 14%;">
+          <li class="Iniciopag" >
+            <a href="#">
+              <div class="item-inner">
+                <div class="menu-item-content popover-open " data-popover=".popo-post" style="color: wheat; ">Postear</div>
+              </div>
+            </a>
+          </li>
+          <li class="Iniciopag">
+            <a href="#">
+              <div class="item-inner">
+                <div class="menu-item-content" id="perfil" style="color: wheat;" >Perfil</div>
+              </div>
+            </a>
+          </li>
+          <li class="Iniciopag">
+            <a href="#">
+              <div class="item-inner">
+                <div class="menu-item-content popup-open" id="Buscar2" data-popup=".personabusc"style="color: wheat;" >Buscar personas</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="col-60 centro paletcolor2" style="margin-right: 4%; margin-top: -8%;">
+        <div class="row centro">
+          <div id="posteos" class="col-80 paletcolor2" style="margin-bottom: 10%; width: 100%;">
+            <div class="card demo-facebook-card">
+              <div class="card-header">
+                <div class="demo-facebook-avatar">
+                  <img src="img/avatar2.jpg" width="34" height="34" />
+                </div>
+                <div class="demo-facebook-name"></div>
+                <div class="demo-facebook-date">
+                  Admin. Ulises.
+                </div>
+              </div>
+              <div class="card-content card-content-padding">
+                <p>¡Bienvenidos a tod@s!.</p>
+                
+                <p class="likes">Likes: 999 &nbsp;&nbsp; Comments: 999</p>
+              </div>
+              <div class="card-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="popover popo-post">
+  <div class="popover-inner">
+    <div class="block">
+      <input id="comentario" type="text" placeholder="¡Postea algo!" style="width: 100%;height: 10vh;"/>
+      <div id="postear" class="button button-outline popover-close btn2">Postear</div>
+    </div>
+  </div>
+</div>
+<div class="popover popo-noseguir">
+  <div class="popover-inner">
+    <div class="block">
+      <p>¿Dejar de seguir a esta persona?</p>
+      <div id="agperr">
+        <p id="quienseguirrr"></p>
+      </div>
+      <p>Dejar de seguir a una persona no te aparecera en tu feed lo que aquella publique</p>
+      <div id="quienseguirr" class="button button-outline btn2 popover-close">¿Continuar?</div>
+      <div id="noseguirr" class="button button-outline btn2 popover-close"> Cancelar </div>
+    </div>
+  </div>
+</div>
+<div class="popover popo-seguir">
+  <div class="popover-inner">
+    <div class="block">
+      <p>¿Seguir a esta persona?</p>
+      <div id="agper">
+        <p id="quienseguirr"></p>
+      </div>
+      <p>Seguir a una persona te aparecera en tu feed lo que aquella publique</p>
+      <div id="quienseguir" class="button button-outline btn2 popover-close popup-close"> Si</div>
+      <div id="noseguir" class="button button-outline btn2 popover-close"> Cancelar </div>
+    </div>
+  </div>
+</div>
+  <div class="popup comentario">
+    <div class="view">
+      <div class="page">
+        <div class="navbar">
+          <div class="navbar-bg"></div>
+          <div class="navbar-inner">
+            <div class="right text-color-white">
+              <!-- Link to close popup -->
+              <a id="actcom" class="link popup-close icon f7-icons color-black"
+                >xmark_circle</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="page-content text-align-center">
+          <div class="block">
+            <div class="row centro">
+              <h2>¡Comentarios!</h2>
+              <div id="cajacoment3">
+
+              </div>
+              <input
+                class="paletcolor2"
+                type="text"
+                placeholder="¿Que quieres comentar?"
+                id="comentar"
+              />
+              <div id="creabtn">
+                <div id="comentas" class="button button-outline btn2">
+                  ¡Comentar!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ESTO ES PARA EL MENO DE OPCIONES -->
+  <div class="row centro">
+    <div class="col-50">
+      <div id="app">
+        <div
+          class="panel panel-right panel-right-1 panel-cover panel-resizable panel-init"
+        >
+          <div class="block">
+            <p>¡Hola!</p>
+            <a
+              class="button button-outline btn2 btntabbar"
+              href="#"
+              data-view=".page-content"
+              id="perfil"
+              >Ir al Perfil</a
+            >
+              <div class="list accordion-list">
+                <ul>
+                  <li class="accordion-item"><a class="item-content item-link" href="#">
+                    <div class="item-inner">
+                      <div class="item-title">¿Necesitas ayuda?</div>
+                    </div>
+                  </a>
+                  <div class="accordion-item-content">
+                    <div class="block">
+                      <div class="list accordion-list accordion-opposite">
+                        <ul>
+                          <li class="accordion-item"><a class="item-content item-link" href="#">
+                              <div class="item-inner">
+                                <div class="item-title">Escribir libro</div>
+                              </div>
+                            </a>
+                            <div class="accordion-item-content">
+                              <div class="block">
+                                <p>¿Como escribo un libro?</p>
+                                <p>En la seccion con el icono del libro y la pluma podras empezar a crear tu libro. Se hace en ordern:
+                                  - primero creas el nombre del libro o historia a crear
+                                  - segundo creas el nombre del capitulo
+                                  - y por ultimo escribis el contenido del capitulo / libro.</p>
+
+                                <p>¿Puedo editarlo mas tarde??</p>
+                                <p>Si. En tu biblioteca podras editar / borrar / agregar todo el contenido que quieras.</p>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="accordion-item"><a class="item-content item-link" href="#">
+                              <div class="item-inner">
+                                <div class="item-title">Seguir a personas</div>
+                              </div>
+                            </a>
+                            <div class="accordion-item-content">
+                              <div class="block">
+                                <p>¿Como sigo a una persona / autor?</p>
+                                <p>En la pantalla de inicio, donde se carga el feed, encontraras un menu a la izquierda donde veras un
+                                  buscador de personas¡Toca el nombre de la persona y empieza a seguirla!.</p>
+
+                                <p>¿Como dejo de Seguir a una persona / autor?</p>
+                                <p>En la pantalla de inicio, donde se carga el feed, en cada posteo que veas aparecera su imagen. Hazle click y 
+                                  podras dejar de seguirla.</p>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="accordion-item"><a class="item-content item-link" href="#">
+                              <div class="item-inner">
+                                <div class="item-title">Buscar libros</div>
+                              </div>
+                            </a>
+                            <div class="accordion-item-content">
+                              <div class="block">
+                                <p>En tu biblioteca encontraras todos los libros que hayas creado, pero ademas, en la esquina 
+                                  superior derecha veras un boton que dice " Biblioteca General". Ahi es donde podras buscar todos
+                                los libros que hay.</p>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="accordion-item"><a class="item-content item-link" href="#">
+                              <div class="item-inner">
+                                <div class="item-title">Encontre un error</div>
+                              </div>
+                            </a>
+                            <div class="accordion-item-content">
+                              <div class="block">
+                                <p>Si quieres reportar un error, o dejar un comentario al desarrollador, puedes comunicarte al siguiente email:
+                                  -  uliiseesgc@hotmail.com 
+                                  Muchas gracias :).</p>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                </ul>
+              </div>
+            <p><a class="panel-close" href="#">Cerrar</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- HASTA ACA MENU DE OPCIONES -->
+  <div class="popup personabusc">
+    <div class="navbar navbarr">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner sliding navbarrr">
+        <div class="title">UWorldBook</div>
+        <div class="right text-color-white">
+          <a class="link popup-close icon f7-icons color-black">xmark_circle</a>
+      </div>
+      </div>
+    </div>
+    <div class="subnavbar">
+      <form class="searchbar">
+        <div class="searchbar-inner">
+          <div class="searchbar-input-wrap">
+            <input type="search" placeholder="Search" />
+            <i class="searchbar-icon"></i>
+            <span class="input-clear-button"></span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="page-content">
+        <div class="row centro paletcolor4">
+          <div class="col-60">
+            <div class="searchbar-backdrop"></div>
+            <div class="block searchbar-hide-on-search">
+              <p>Encuentra personas para poder seguir. ¡Te apareceran sus posteos!</p>
+            </div>
+            <div class="list searchbar-found">
+              <div id="buscadora2">
+                <ul id="buscarpers" >
+  
+                </ul>
+              </div>
+            </div>
+            <div class="block searchbar-not-found">
+              <div class="block-inner">No hay nadie con ese nombre</div>
+            </div>
+          </div>
+
+        </div>
+    </div>   
+  </div>
+</div>
+</body>
