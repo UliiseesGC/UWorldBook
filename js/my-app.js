@@ -279,6 +279,25 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
       }
     });
   }
+
+  $$('#barrabusc').on('click', function(){
+    $$('#barrabusc2').append(`
+    <form class="searchbar" id='barrabusc3'>
+    <div class="searchbar-inner">
+      <div class="searchbar-input-wrap">
+        <input type="search" placeholder="Search" />
+        <i class="searchbar-icon"></i>
+        <span class="input-clear-button"></span>
+      </div>
+    </div>
+    </form>
+    `)
+    busc();
+  })
+  $$('#barrabusc4').on('click', function(){
+    $$('#barrabusc3').remove()
+  })
+
   // Crea el feed en el inicio con los usuarios a los que sigo:
    cargarfed();
  async function cargarfed(){
