@@ -31,7 +31,7 @@
   width: 70%;
   margin: 2% 0.2% 2% 0;
   background-color: rgba(198, 224, 220, 0.4);
-  transition: all 0.4gits ease-in-out;
+  transition: all 0.4s ease-in-out;
   justify-content: center;
   place-items: center;
   display: flex;
