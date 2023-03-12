@@ -1,6 +1,4 @@
-
 var $$ = Dom7;
-
 var app = new Framework7({
     root: '#app',
     name: 'My App',  
@@ -74,6 +72,7 @@ var app = new Framework7({
     ]
   });
 
+// import { changeVisible } from "./form/formFunctions";
 var mainView = app.views.create('.view-main');
 
 // VARIABLES DE CLOUD FIRESTORE
@@ -130,14 +129,32 @@ var todopers=[];
 var todopers2=[];
 var arraysiguiendo =[];
 $$(document).on('deviceready', function() {
-    console.log("Device is ready!");
+  console.log("Device is ready!");
 });
-
-$$(document).on('page:init', function (e) {
-    console.log(e);
-
-  
+$$(document).on('page:init', function(e) {
+  console.log(e);
 })
+// INDEX FUNCTIONS
+function changeVisible(div) {
+  div.style.visibility = 'visible';
+  div.style.height = '60%';
+  return true;
+}
+function changeHiden(div) {
+  div.style.visibility = 'hidden';
+  div.style.height = '0%';
+  // inputDiv.color = 'transparent';
+  return true;
+}
+function errorForm(id){
+  div = document.getElementById(id);
+  div.style.backgroundColor = 'rgba(200, 0, 0, 0.4)';
+  div.style.borderRadius = '8px'
+
+  div.addEventListener("focus", function(){
+    div.style.backgroundColor = 'transparent';
+  });
+}
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   $$('#ingreso').on('click', function(){
     if ($$('#user').val()=="") {
@@ -145,52 +162,103 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     } else if ($$('#pass').val()=="") {
       app.dialog.alert('Completa la contraseña por favor');
     } else {
-
-        // usuario=$$('#user').val();
-        email=$$('#emaillog').val();
-        contraseña=$$('#pass').val();
-        usuario=$$('#user').val();
-
-        firebase.auth().signInWithEmailAndPassword(email, contraseña)
-        .then(function(){
-          mainView.router.navigate('/inicio/', { transition: 'f7-push' })
-
+      // usuario=$$('#user').val();
+      email=$$('#emaillog').val();
+      contraseña=$$('#pass').val();
+      usuario=$$('#user').val();
+      firebase.auth().signInWithEmailAndPassword(email, contraseña)
+      .then(function(){
+        mainView.router.navigate('/inicio/', { transition: 'f7-push' })
+      })
+      .catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/user-not-found') {
+          alert('Usuario no encontrado.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
         })
-        .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode == 'auth/user-not-found') {
-            alert('Usuario no encontrado.');
-            } else {
-            alert(errorMessage);
-            }
-            console.log(error);
-            })
-            
      }
   })  
   $$('#Registro').on('click', function(){
     mainView.router.navigate('/Registro/', { transition: 'f7-push' });
+  });
+
+  let divIniciarSesion = document.getElementById("iniciar-sesion");
+  let divBoxLogIn= document.getElementById("box-log-in");
+  let divRegistro = document.getElementById("registrarse");
+  let divBoxSignUp= document.getElementById("box-sign-up");
+
+  divIniciarSesion.addEventListener("mouseover", function(){
+    changeVisible(divBoxLogIn);
+  });
+  divIniciarSesion.addEventListener("mouseout", function(){
+    changeHiden(divBoxLogIn);
+  });
+
+  divRegistro.addEventListener("mouseover", function(){
+    changeVisible(divBoxSignUp);
+  });
+  divRegistro.addEventListener("mouseout", function(){
+    changeHiden(divBoxSignUp);
+  });
+
+  let divFlecha = document.getElementById("div-flecha");
+  let divAbout = document.getElementById("div-about");
+  let uWorldBook = document.getElementById("uworldbook");
+  uWorldBook.addEventListener('click', function() {
+    if (divAbout.classList.contains("div-about-hidden")) {
+      uWorldBook.classList.replace('agrandar', 'achicar');
+      divAbout.classList.replace('div-about-hidden', 'div-about-show');
+    } else {
+      uWorldBook.classList.replace('achicar', 'agrandar');
+      divAbout.classList.replace('div-about-show', 'div-about-hidden')
+    }
   })
-})
-$$(document).on('page:init', '.page[data-name="Registro"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
+  // let inputSelect = document.getElementsByClassName("input-edit");
+
+  // if (inputSelect.length > 0) {
+  //   for(let i= 0; i <=inputSelect.length; i++ ){
+  //     inputSelect[i].addEventListener('focus', function(){
+  //       // let changeHover = document.querySelector("box-log-in");
+  //       // let changeOut = changeHover.querySelector(":not(:hover)::after");
+        
+  //       changeVisible(divBoxLogIn);
+  //       changeVisible(divBoxSignUp);
+  //     });
+  //   }
+  // }
+
+  // let divCol = document.querySelector('.col-iluminate');
+  // let iluminate = divCol.querySelector('::before');
+
+  // divCol.addEventListener('mousemove', e => {
+  //   const x = e.clientX - e.target.offsetLeft;
+  //   const y = e.clientY - e.target.offsetTop;
+
+  //   iluminate.style.transform = `translate(${x}px, ${y}px)`;
+  // })
 
   $$('#Registro1').on('click', function(){
-    if ($$('#passreg').val()=="") {
-      app.dialog.alert('Completa la contraseña, por favor');
-    } else if ($$('#passreg1').val()==""){
-      app.dialog.alert('Completa el campo de "repetir contraseña", por favor')
-    } else if ($$('#passreg2').val()!=$$('#passreg').val()){
-      app.dialog.alert('Las contraseñas no son iguales')
-      console.log();
+    if ($$('#userreg').val()=="") {
+      // app.dialog.alert('Completa la contraseña, por favor');
+      errorForm('userreg');
     } else if ($$('#emailreg').val()==""){
-      app.dialog.alert('Completa el campo del email, por favor')
-    } else if ($$('#userreg').val()==""){
-      app.dialog.alert('Completa el campo del nombre, por favor')
-    }
-
+      // app.dialog.alert('Completa el campo de "repetir contraseña", por favor')
+      errorForm('emailreg');
+    } else if ($$('#passreg').val()==""){
+      // app.dialog.alert('Completa el campo del email, por favor');
+      errorForm('passreg');
+    } else if ($$('#passreg1').val()==""){
+      // app.dialog.alert('Completa el campo del nombre, por favor');
+      errorForm('passreg1');
+    } else if ($$('#passreg1').val()!=$$('#passreg').val()){
+      // app.dialog.alert('Las contraseñas no son iguales')
+      errorForm('passreg');
+      errorForm('passreg1');
+    } 
     else {
       usuario=$$('#userreg').val();
       contraseña=$$('#passreg').val();
@@ -198,7 +266,6 @@ $$(document).on('page:init', '.page[data-name="Registro"]', function (e) {
       // console.log(usuario, contraseña, email);
       console.log(contraseña, email);
       mainView.router.navigate('/Index/', { transition: 'f7-flip' });
-
       var email = email;
       var contraseña = contraseña;
       firebase.auth().createUserWithEmailAndPassword(email, contraseña)
@@ -210,16 +277,11 @@ $$(document).on('page:init', '.page[data-name="Registro"]', function (e) {
         Siguiendo: ["ulii@ulii.com"],
         };
         colUsuarios.doc(email).set(datos);
-
-          $$('#Graciasreg2').removeClass('novisible');
-          $$('#Graciasreg2').addClass('visible');
-          $$('#btnreg2').removeClass('visible');
-          $$('#btnreg2').addClass('novisible');
-
-
- 
+        $$('#Graciasreg2').removeClass('novisible');
+        $$('#Graciasreg2').addClass('visible');
+        $$('#btnreg2').removeClass('visible');
+        $$('#btnreg2').addClass('novisible');
       })
-
       .catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
@@ -232,11 +294,12 @@ $$(document).on('page:init', '.page[data-name="Registro"]', function (e) {
       console.log(error);
       })
     }
-        })  
-        $$('#Registro').on('click', function(){
-          app.dialog.alert('Por favor complete el formulario para el registro');
-        })
+    })  
+    $$('#Registro').on('click', function(){
+      app.dialog.alert('Por favor complete el formulario para el registro');
+    })
 })
+
 $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
 
   $$('#inicio1').on('click', function(){

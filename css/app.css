@@ -1,4 +1,443 @@
-/* Your app custom styles here */
+/* Colors */
+.colors {
+  background-color: rgba(198, 224, 220, 0.8);
+  background-color: rgba(236, 228, 206, 0.8);
+  background-color: rgba(242, 212, 174, 0.8);
+  background-color: rgba(244, 142, 120, 0.8);
+}
+
+/* Text Styles */
+
+.p {
+  font-family: sans-serif;
+
+}
+
+/* INDEX STYLES */
+
+.col-conteiner {
+  width: 100vw;
+  height: 100vh;
+}
+.col-sesion {
+  height: 94.8vh;
+  border-radius: 20px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* -- SIDE LEFT -- */
+#col1 {
+  width: 70%;
+  margin: 2% 0.2% 2% 0;
+  background-color: rgba(198, 224, 220, 0.4);
+  transition: all 0.4gits ease-in-out;
+  justify-content: center;
+  place-items: center;
+  display: flex;
+}
+#col1:hover {
+  background-color: rgba(236, 228, 206, 0.8);
+  width: 70%;
+  margin: 2% 2% 2% 2%;
+  box-shadow: 0px 0px 12px 2px rgba(242, 212, 174, 0.8);
+}
+#div-front-page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
+}
+#div-uworldbook {
+  display: flex;
+  height: 20%;
+  width: 100%;
+  justify-content: center;
+  place-items: center;
+  background-color: transparent;
+}
+#uworldbook {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: rgba(236, 228, 206, 1);
+  text-align: center;
+  place-items: center;
+  justify-content: center;
+  transition: 0.8s all;
+  cursor: pointer;
+}
+.achicar {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+.agrandar {
+  height: 250px;
+  width: 250px;
+  border-radius: 75px;
+  background-color: rgba(244, 142, 120, 1);
+}
+.agrandar::after,
+.agrandar::before {
+  display: none;
+  transition: 0s all;
+}
+#uworldbook:hover {
+  box-shadow: 0 5px 35px 0px rgba(0,0,0,0.2);
+}
+#uworldbook:hover::before, 
+#uworldbook:hover::after {
+  content: ' ';
+  position: absolute;
+  display: block;
+  height: 250px;
+  width: 250px;
+  background-color: rgba(244, 142, 120, 1);
+  border-radius: 75px;
+  z-index: -1;
+  animation: 1s clockwise infinite;
+}
+
+#uworldbook:hover:after {
+  background-color: rgba(198, 224, 220, 1);
+  animation: 1s counterclockwise infinite;
+}
+
+@keyframes clockwise {
+  0% {
+    top: 16px;
+    left: 0px;
+  }
+ 12% {
+    top: 8px;
+    left: -8px;
+  }
+  24% {
+    top: 0px;
+    left: -16px;    
+  }
+  36% {
+    top: -8px;
+    left: -8px;
+  } 
+  50% {
+    top: -16px;
+    left: 0px;    
+  }
+ 62% {
+    top: -8px;
+    left: 8px;
+  } 
+  74% {
+    top: 0px;
+    left: 16px;
+  }
+  86% {
+    top: 8px;
+    left: 8px;
+  } 
+  100% {
+    top: 16px;
+    left: 0px;    
+  }
+}
+
+@keyframes counterclockwise {
+  0% {
+    top: -16px;
+    left: 0px;
+  }
+ 12% {
+    top: -8px;
+    left: 8px;
+  }
+  24% {
+    top: 0px;
+    left: 16px;    
+  }
+  36% {
+    top: 8px;
+    left: 8px;
+  } 
+  50% {
+    top: 16px;
+    left: 0px;    
+  }
+ 62% {
+    top: 8px;
+    left: -8px;
+  } 
+  74% {
+    top: 0px;
+    left: -16px;
+  }
+  86% {
+    top: -8px;
+    left: -8px;
+  } 
+  100% {
+    top: -16px;
+    left: 0px;    
+  }
+}
+
+
+
+#div-about {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  transition: all 1s ease-in-out;
+}
+.div-about-show {
+  height: 100%;
+}
+.div-about-hidden {
+  height: 2%;
+}
+.card-about {
+  position: relative;
+  width: 0;
+  flex-grow: 1;
+  object-fit: cover;
+  height: 100%;
+  background-color: rgba(198, 224, 220, 1);
+  transition: all 0.4s ease-in-out;
+  display: flex;
+}
+.card-about::before, 
+.card-about::after {
+  content: '';
+  position: absolute;
+  border-left: 10px solid rgb(130, 145, 185);
+  border-right: 10px solid rgba(236, 228, 206, 1);
+  height: 30px;
+  transition: all 0.6s ease-in-out;
+  border-bottom-left-radius: 20px;
+}
+.card-about:hover {
+  width: 70%;
+  background-color: rgba(242, 212, 174, 1);
+  border-bottom-left-radius: 30px;
+}
+.card-about:hover::after,
+.card-about:hover::before {
+  border-left: 10px solid rgb(90, 118, 168, 1);
+  border-right: 10px solid rgba(236, 228, 206, 1);
+  height: 100%;
+  border-bottom-left-radius: 10px;
+}
+.card-about-content {
+  width: 100%; 
+  height: 100%;
+  justify-content: center; 
+  place-items: center; 
+  margin-left: 24px;
+  transition: all 0.8 ease-in-out;
+  opacity: 1;
+}
+.card-about:not(:hover) .card-about-content {
+  overflow: hidden;
+  min-width: 250px;
+  opacity: 0.4;
+  transition: all 0.8 ease-in-out;
+}
+.card-about:hover .card-about-content {
+  opacity: 1;
+  transition: all 0.8 ease-in-out;
+}
+
+/* -- SIDE RIGHT -- */
+
+#col2 {
+  transition: all 0.4s ease-in-out;
+  width: 30%;
+  margin: 2% 0 2% 0;
+  background-color: rgba(236, 228, 206, 0.2);
+  transition: all 0.6s cubic-bezier(0.6, -0.28, 0.74, 0.04);
+}
+#col2:hover {
+  background-color: rgba(236, 228, 206, 0.8);
+  width: 70%;
+  margin: 2% 2% 2% 2%;
+  box-shadow: 0px 0px 12px 2px rgba(242, 212, 174, 0.8);
+}
+
+
+/* Div Sesion - Register Styles */
+
+#box-sesion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+}
+.div-sesion {
+  width: 40%;
+  height: 10%;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+}
+.div-sesion:hover {
+  height: 50%;
+}
+.div-sesion:not(:hover)::after {
+  height: 10%;
+}
+.box-form {
+  transition: visibility 0.4s ease-in-out;
+  border-radius: 10px;
+  background-color: rgba(242, 212, 174, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  border: 2px solid gray;
+  transition: all 0.2s ease-in-out;
+}
+.box-form:hover::after {
+  border: 2px solid transparent;
+}
+#box-log-in {
+  visibility: hidden;
+  height: auto;
+}
+#box-sign-up {
+  visibility: hidden;
+  height: auto;
+}
+
+/* FORM EDIT */
+
+#form-edit {
+  border-radius: 10px;
+}
+.input-edit {
+  height: 28%;
+  border-radius: 8px;
+  border-color: transparent;
+  border: 0 0 4px 0 solid black;
+  margin: 2%;
+  background-color: rgba(198, 224, 220, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+.input-edit::placeholder {
+  /* color: rgba(255, 255, 255, 0.4); */
+}
+.input-edit[type="password"], 
+.input-edit[type="text"] {
+  margin: 2.90%;
+  background-color: rgba(198, 224, 220, 0.4);
+  border-radius: 8px;
+  height: 90px;
+}
+.button-form {
+  text-decoration: none;
+  background-color: transparent;
+  color: wheat;
+}
+.center-div {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  margin: 2%;
+}
+
+/* BUTTONSTYLE */
+.my-button {
+  cursor: pointer;
+  position: relative;
+  width: 40%;
+  height: 20%;
+  margin: 8px;
+  padding: 10px 20px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: all 1s;
+}
+.my-button::after,
+.my-button::before {
+  content: '';
+  width: 10%;
+  height: 10%;
+  position: absolute;
+  border: 0px solid #fff;
+  transition: all 1s;
+}
+.my-button::after {
+  top: -1px;
+  left: -1px;
+  border-top: 4px solid rgba(255, 255, 255, 0.4);;
+  border-left: 4px solid rgba(255, 255, 255, 0.4);;
+}
+.my-button::before {
+  bottom: -1px;
+  right: -1px; 
+  border-bottom: 5px solid rgba(255, 255, 255, 0.4);;
+  border-right: 5px solid rgba(255, 255, 255, 0.4);;
+}
+.my-button:hover {
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  background-color: rgba(255, 255, 255, 0.4);;
+}
+.my-button:hover::after,
+.my-button:hover::before {
+  width: 100%;
+  height: 100%;
+  border-color: gray;
+  color: white;
+} 
+
+/* -------------------- */
+
+/* DIV STYLES */
+
+.div-tittle-card {
+  min-height: 8%;
+  max-height: 16%;
+  /* margin: 4% 30% 6% 6%; */
+  line-height: 1;
+  transition: all 1s ease-in-out;
+}
+.div-tittle-card:hover {
+  justify-content: center;
+  place-items: center;
+}
+
+#div-flecha {
+  width: 0%;
+  height: 2%;
+  position: relative;
+  justify-content: center;
+  place-items: center;
+  display: flex;
+  border-radius: 0px;
+  transition: all 1s ease-in-out;
+  cursor: pointer;
+}
+.up {
+  transform: translate(646%, 0%);
+  border-top: 24px solid black;
+  border-left: 34px solid transparent;
+  border-right: 38px solid transparent;
+  border-bottom: 38px solid transparent;
+}
+.down {
+  transform: translate(646%, 384%);
+  border-top: 24px solid transparent;
+  border-left: 34px solid transparent;
+  border-right: 38px solid transparent;
+  border-bottom: 38px solid black;
+}
+/* -- -- -- --  */
 
 .Iniciopag {
   background-color: #0b5b80;
@@ -40,7 +479,7 @@ background-color: #179cbc ;
   color: #a2b9ee;
 }
 .paletcolor2{
-  background-color: #a2dcee;
+  background-color: #97cddd;
 }
 .paletcolor3{
   background-color: #adeee2;

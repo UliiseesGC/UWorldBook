@@ -41,101 +41,173 @@
         <!-- Initial Page, "data-name" contains page name -->
         <div data-name="index" class="page fondo2">
           <div class="page-content">
-            <body class="fondo2">
-              <div class="block text-align-center">
-                <div class="row centro">
-                  <div class="col-50">
-                    <img class="imgforma" src="img/U.gif" style="width: 100%;height: 100%;"/>
+            <body style="background-color: wheat;">
+              <div class="row col-conteiner" style="flex-wrap: nowrap;
+                justify-content: space-between;
+                overflow: hidden;
+              ">
+                <div class="col-70 col-sesion" id="col1">
+                  <div id="div-front-page">
+                    <div></div>
+                    <div id="div-uworldbook">
+                      <div id="uworldbook" class="agrandar">
+                        UWorldBook
+                      </div>
+                    </div>
+                    <div id="div-about" class="div-about-hidden">
+                      <div class="card-about" id="card-about-1">
+                        <div class="card-about-content">
+                          <div class="div-tittle-card "> 
+                            <h2>
+                              Que es UWorldBook?? 
+                            </h2>                
+                          </div>
+                          <hr />
+                          <p>
+                            UWorldBook es una plataforma en linea para poder crear tu propio contenido como <br />
+                            escritor/a. Tendras tu propia biblioteca con tus libros, y cuando quieras, podras <br />
+                            hacerlos publicos!! 
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card-about" id="card-about-2">
+                        <div class="card-about-content">
+                          <div class="div-tittle-card "> 
+                            <h2>
+                              Escribe tu propio libro!
+                            </h2>                            
+                          </div>
+                          <hr />
+                          <p>
+                            En esta plataforma podras escribir libremente tus libros. Si quieres, puedes ponerlos
+                            en privado o en publico. Recuerda que si los guardas como publicos todos lo podran leer!!
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card-about" id="card-about-3">
+                        <div class="card-about-content">
+                          <div class="div-tittle-card "> 
+                            <h2>
+                              Sigue a tus autores favoritos!!
+                            </h2>                          
+                          </div>
+                          <hr />
+                          <p>
+                            En UWorldBook ademas de escribir tus libros, puedes seguir a tus autores favoritos!!
+                            Al seguirlos podras ver sus posts en tu feed y podras enterarte de sus novedades.  
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card-about" id="card-about-4">
+                        <div class="card-about-content">
+                          <div class="div-tittle-card "> 
+                            <h2>
+                              Contacto
+                            </h2>
+                          </div>
+                          <hr />
+                          <p>Puedes dejar un mensaje en: </p>
+                          <ul>
+                            <li>
+                              Instagram
+                            </li>
+                            <li>
+                              Twitter
+                            </li>
+                            <li>
+                              LinkedIn
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="row centro" style="margin-top: 10%;">
-                  <div class="col-20 text-align-center">
-                    <div class="button button-outline login-screen-open btnreg" data-login-screen=".login-screen" >Iniciar Sesión</div>
-                    <div class="button button-outline btnreg" href="#" data-view=".page-content"  id="Registro" >¡Registrarme!</div>
+                <div class="col-30 col-sesion" id="col2">
+                  <div id="box-sesion">
+                    <div id="iniciar-sesion" class="div-sesion">
+                      <p style="cursor: pointer;">Iniciar Sesion</p>
+                      <div id="box-log-in" class="box-form">
+                        <input  
+                          class="input-edit" 
+                          type="text"
+                          name="username" 
+                          placeholder="Usuario"/>
+                        <input
+                          id="emaillog"
+                          class="input-edit"
+                          type="text"
+                          name="username"
+                          placeholder="Email"
+                        />
+                        <input
+                          id="pass"
+                          type="password"
+                          class="input-edit"
+                          name="password"
+                          placeholder="Contraseña"
+                        />
+                        <div class="center-div">
+                          <div class="my-button" id="ingreso">
+                            Iniciar Sesion
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="registrarse" class="div-sesion">
+                      <p style="cursor: pointer;">Registrarse</p>
+                      <div id="box-sign-up" class="box-form">
+                        <input  
+                          id="userreg"
+                          class="input-edit" 
+                          name="username" 
+                          placeholder="Usuario"/>
+                        <input
+                          id="emailreg"
+                          class="input-edit"
+                          name="username"
+                          placeholder="Email"/>
+                        <input
+                          id="passreg"
+                          class="input-edit"
+                          type="password"
+                          name="username"
+                          placeholder="Contraseña"/>
+                        <input
+                          id="passreg1"
+                          class="input-edit"
+                          type="password"
+                          name="password"
+                          required
+                          placeholder="Repetir contraseña"/>
+                        <div class="center-div">
+                          <div class="my-button" id="Registro1">
+                            Registrarse
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </div>
+                <div
+                  style="
+                    width: 20%;
+                    height: 20%;
+                    position: absolute;
+                    z-index: 90;
+                    left: -100%;
+                    transition: left 0.4s ease-in-out;
+                    top: 20%;
+                    background-color: rgba(44, 43, 43, 0.4);
+                    border-radius: 20px;
+                  "
+                  onmouseover="
+                    this.style.height = '50%'
+                  "
+                >
                 </div>
               </div>
             </body>
-          </div>
-          <div class="login-screen reglog">
-            <div class="view">
-              <div class="page reglog">
-                <div class="page-content login-screen-content reglog">
-                  <div class="login-screen-title">UWorldBook</div>
-                  <form>
-                    <div class="list">
-                      <ul>
-                        <li class="item-content item-input">
-                          <div class="item-inner">
-                            <div class="item-title item-label">Usuario</div>
-                            <div class="item-input-wrap">
-                              <input
-                                id="user"
-                               
-                                type="text"
-                                name="username"
-                                placeholder="Usuario"
-                              />
-                            </div>
-                          </div>
-                        </li>
-                        <li class="item-content item-input">
-                          <div class="item-inner">
-                            <div class="item-title item-label">Email</div>
-                            <div class="item-input-wrap">
-                              <input
-                                id="emaillog"
-                             
-                                type="email"
-                                name="username"
-                                placeholder="Email"
-                              />
-                            </div>
-                          </div>
-                        </li>
-                        <li class="item-content item-input">
-                          <div class="item-inner">
-                            <div class="item-title item-label">Contraseña</div>
-                            <div class="item-input-wrap">
-                              <input
-                                id="pass"
-                                
-                                type="password"
-                                name="password"
-                                placeholder="Contraseña"
-                              />
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="list">
-                      <ul>
-                        <li>
-                          <a
-                            class="list-button login-screen-close paletcolor3"
-                            href="#"
-                            data-view=".page-content"
-                            id="ingreso"
-                            >Iniciar Sesion</a
-                          >
-                        </li>
-                      </ul>
-                      <div class="block-footer">
-                        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
-                        <p class="paletcolor3">
-                          <a
-                            class="link login-screen-close paletcolor3"
-                            href="#"
-                            >SALIR</a
-                          >
-                        </p>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -167,5 +239,6 @@
       src="lib/framework7/framework7-bundle.min.js"
     ></script>
     <script type="text/javascript" src="js/my-app.js"></script>
+    <script type="text/javascript" src="js/form/formFunctions.js"></script>
   </body>
 </html>
