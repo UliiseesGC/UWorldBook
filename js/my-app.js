@@ -152,7 +152,7 @@ function errorForm(id){
   div.style.borderRadius = '8px'
 
   div.addEventListener("focus", function(){
-    div.style.backgroundColor = 'transparent';
+    div.style.backgroundColor = 'rgba(198, 224, 220, 0.4)';
   });
 }
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
@@ -190,20 +190,22 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   let divBoxLogIn= document.getElementById("box-log-in");
   let divRegistro = document.getElementById("registrarse");
   let divBoxSignUp= document.getElementById("box-sign-up");
+  let divColumnLeft = document.getElementById("col1");
 
   divIniciarSesion.addEventListener("mouseover", function(){
+    divRegistro.classList.replace('div-sesion-agrandar', 'div-sesion-achicar');
+    changeHiden(divBoxSignUp);
+    divIniciarSesion.classList.replace('div-sesion-achicar', 'div-sesion-agrandar');
     changeVisible(divBoxLogIn);
-  });
-  divIniciarSesion.addEventListener("mouseout", function(){
-    changeHiden(divBoxLogIn);
   });
 
   divRegistro.addEventListener("mouseover", function(){
+    divIniciarSesion.classList.replace('div-sesion-agrandar', 'div-sesion-achicar');
+    changeHiden(divBoxLogIn);
+    divRegistro.classList.replace('div-sesion-achicar', 'div-sesion-agrandar');
     changeVisible(divBoxSignUp);
   });
-  divRegistro.addEventListener("mouseout", function(){
-    changeHiden(divBoxSignUp);
-  });
+
 
   let divFlecha = document.getElementById("div-flecha");
   let divAbout = document.getElementById("div-about");
@@ -216,7 +218,14 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
       uWorldBook.classList.replace('achicar', 'agrandar');
       divAbout.classList.replace('div-about-show', 'div-about-hidden')
     }
-  })
+  });
+
+  divColumnLeft.addEventListener("mouseover", function(){
+    divIniciarSesion.classList.replace('div-sesion-agrandar', 'div-sesion-achicar');
+    changeHiden(divBoxLogIn);
+    divRegistro.classList.replace('div-sesion-agrandar', 'div-sesion-achicar');
+    changeHiden(divBoxSignUp);
+  });
   // let inputSelect = document.getElementsByClassName("input-edit");
 
   // if (inputSelect.length > 0) {

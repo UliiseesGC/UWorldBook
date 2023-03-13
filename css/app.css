@@ -284,12 +284,19 @@
   transition: all 0.4s ease-in-out;
 }
 .div-sesion:hover {
+  /* height: 50%; */
+}
+.div-sesion-agrandar {
   height: 50%;
 }
-.div-sesion:not(:hover)::after {
+.div-sesion-achicar {
   height: 10%;
 }
+.div-sesion:not(:hover)::after {
+  /* height: 10%; */
+}
 .box-form {
+  min-width: 150px;
   transition: visibility 0.4s ease-in-out;
   border-radius: 10px;
   background-color: rgba(242, 212, 174, 0.6);
@@ -325,6 +332,7 @@
   margin: 2%;
   background-color: rgba(198, 224, 220, 0.4);
   transition: all 0.2s ease-in-out;
+  color: black;
 }
 .input-edit::placeholder {
   /* color: rgba(255, 255, 255, 0.4); */
@@ -355,12 +363,14 @@
   cursor: pointer;
   position: relative;
   width: 40%;
+  min-width: 100px;
   height: 20%;
   margin: 8px;
   padding: 10px 20px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   transition: all 1s;
+  white-space: nowrap;
 }
 .my-button::after,
 .my-button::before {
