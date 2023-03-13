@@ -32,6 +32,7 @@
   margin: 2% 0.2% 2% 0;
   background-color: rgba(198, 224, 220, 0.4);
   transition: all 0.4s ease-in-out;
+  transition-delay: 0.4s;
   justify-content: center;
   place-items: center;
   display: flex;
@@ -41,6 +42,9 @@
   width: 70%;
   margin: 2% 2% 2% 2%;
   box-shadow: 0px 0px 12px 2px rgba(242, 212, 174, 0.8);
+}
+#col2#col1:hover {
+  width: 30%;
 }
 #div-front-page{
   display: flex;
@@ -257,6 +261,8 @@
   margin: 2% 0 2% 0;
   background-color: rgba(236, 228, 206, 0.2);
   transition: all 0.6s cubic-bezier(0.6, -0.28, 0.74, 0.04);
+  transition-delay: 0.4s;
+  overflow-y: auto;
 }
 #col2:hover {
   background-color: rgba(236, 228, 206, 0.8);
@@ -264,7 +270,12 @@
   margin: 2% 2% 2% 2%;
   box-shadow: 0px 0px 12px 2px rgba(242, 212, 174, 0.8);
 }
-
+/* #col2:hover, #col2:focus {
+  background-color: rgba(236, 228, 206, 0.8);
+  width: 70%;
+  margin: 2% 2% 2% 2%;
+  box-shadow: 0px 0px 12px 2px rgba(242, 212, 174, 0.8);
+} */
 
 /* Div Sesion - Register Styles */
 
@@ -275,6 +286,7 @@
   width: 100%;
   height: 100%;
   place-items: center;
+  min-height: 700px;
 }
 .div-sesion {
   width: 40%;
@@ -283,17 +295,11 @@
   text-align: center;
   transition: all 0.4s ease-in-out;
 }
-.div-sesion:hover {
-  /* height: 50%; */
-}
 .div-sesion-agrandar {
   height: 50%;
 }
 .div-sesion-achicar {
   height: 10%;
-}
-.div-sesion:not(:hover)::after {
-  /* height: 10%; */
 }
 .box-form {
   min-width: 150px;
@@ -306,17 +312,19 @@
   justify-content: center;
   border: 2px solid gray;
   transition: all 0.2s ease-in-out;
+  padding: 8%;
+  /* min-height: 250px; */
 }
 .box-form:hover::after {
   border: 2px solid transparent;
 }
 #box-log-in {
   visibility: hidden;
-  height: auto;
+  height: 0;
 }
 #box-sign-up {
   visibility: hidden;
-  height: auto;
+  height: 0;
 }
 
 /* FORM EDIT */
@@ -334,12 +342,19 @@
   transition: all 0.2s ease-in-out;
   color: black;
 }
+.input-edit-sign-in {
+  visibility: hidden;
+}
+.input-edit-log-in {
+  visibility: hidden;
+}
 .input-edit::placeholder {
   /* color: rgba(255, 255, 255, 0.4); */
 }
 .input-edit[type="password"], 
 .input-edit[type="text"] {
   margin: 2.90%;
+  padding: 10px;
   background-color: rgba(198, 224, 220, 0.4);
   border-radius: 8px;
   height: 90px;

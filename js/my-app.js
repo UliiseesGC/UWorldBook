@@ -72,7 +72,6 @@ var app = new Framework7({
     ]
   });
 
-// import { changeVisible } from "./form/formFunctions";
 var mainView = app.views.create('.view-main');
 
 // VARIABLES DE CLOUD FIRESTORE
@@ -137,13 +136,12 @@ $$(document).on('page:init', function(e) {
 // INDEX FUNCTIONS
 function changeVisible(div) {
   div.style.visibility = 'visible';
-  div.style.height = '60%';
+  div.style.height = '70%';
   return true;
 }
 function changeHiden(div) {
   div.style.visibility = 'hidden';
   div.style.height = '0%';
-  // inputDiv.color = 'transparent';
   return true;
 }
 function errorForm(id){
@@ -155,12 +153,28 @@ function errorForm(id){
     div.style.backgroundColor = 'rgba(198, 224, 220, 0.4)';
   });
 }
+function showInput(input){
+  for(let i= 0; i <= input.length; i++ ){
+    if (input[i]) {
+      input[i].style.visibility = 'visible';
+    }
+  }
+}
+function hiddeInput(input){
+  for(let i= 0; i <= input.length; i++ ){
+    if (input[i]) {
+      input[i].style.visibility = 'hidden';
+    }
+  }
+}
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   $$('#ingreso').on('click', function(){
     if ($$('#user').val()=="") {
-      app.dialog.alert('Completa el usuario por favor');
+      errorForm('user');
+    } else if ($$('#emaillog').val()=="") {
+      errorForm('emaillog');
     } else if ($$('#pass').val()=="") {
-      app.dialog.alert('Completa la contraseña por favor');
+      errorForm('pass');
     } else {
       // usuario=$$('#user').val();
       email=$$('#emaillog').val();
@@ -191,23 +205,30 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   let divRegistro = document.getElementById("registrarse");
   let divBoxSignUp= document.getElementById("box-sign-up");
   let divColumnLeft = document.getElementById("col1");
+  let inputSelectLogin = document.getElementsByClassName("input-edit-log-in");
+  let inputSelectSignin = document.getElementsByClassName("input-edit-sign-in");
 
+
+  //Muestra u oculta el contenido de la columna de la derecha al hacer hover
   divIniciarSesion.addEventListener("mouseover", function(){
     divRegistro.classList.replace('div-sesion-agrandar', 'div-sesion-achicar');
     changeHiden(divBoxSignUp);
     divIniciarSesion.classList.replace('div-sesion-achicar', 'div-sesion-agrandar');
     changeVisible(divBoxLogIn);
+    hiddeInput(inputSelectSignin);
+    showInput(inputSelectLogin);
   });
-
+  
   divRegistro.addEventListener("mouseover", function(){
     divIniciarSesion.classList.replace('div-sesion-agrandar', 'div-sesion-achicar');
     changeHiden(divBoxLogIn);
     divRegistro.classList.replace('div-sesion-achicar', 'div-sesion-agrandar');
     changeVisible(divBoxSignUp);
+    hiddeInput(inputSelectLogin);
+    showInput(inputSelectSignin);
   });
 
 
-  let divFlecha = document.getElementById("div-flecha");
   let divAbout = document.getElementById("div-about");
   let uWorldBook = document.getElementById("uworldbook");
   uWorldBook.addEventListener('click', function() {
@@ -220,13 +241,16 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     }
   });
 
+  //Oculta el formulario al hacer over en la columna izquierda
   divColumnLeft.addEventListener("mouseover", function(){
     divIniciarSesion.classList.replace('div-sesion-agrandar', 'div-sesion-achicar');
     changeHiden(divBoxLogIn);
     divRegistro.classList.replace('div-sesion-agrandar', 'div-sesion-achicar');
     changeHiden(divBoxSignUp);
+    //ocultar inputs del form
+    hiddeInput(inputSelectLogin);
+    hiddeInput(inputSelectSignin);
   });
-  // let inputSelect = document.getElementsByClassName("input-edit");
 
   // if (inputSelect.length > 0) {
   //   for(let i= 0; i <=inputSelect.length; i++ ){
@@ -240,31 +264,17 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   //   }
   // }
 
-  // let divCol = document.querySelector('.col-iluminate');
-  // let iluminate = divCol.querySelector('::before');
-
-  // divCol.addEventListener('mousemove', e => {
-  //   const x = e.clientX - e.target.offsetLeft;
-  //   const y = e.clientY - e.target.offsetTop;
-
-  //   iluminate.style.transform = `translate(${x}px, ${y}px)`;
-  // })
 
   $$('#Registro1').on('click', function(){
     if ($$('#userreg').val()=="") {
-      // app.dialog.alert('Completa la contraseña, por favor');
       errorForm('userreg');
     } else if ($$('#emailreg').val()==""){
-      // app.dialog.alert('Completa el campo de "repetir contraseña", por favor')
       errorForm('emailreg');
     } else if ($$('#passreg').val()==""){
-      // app.dialog.alert('Completa el campo del email, por favor');
       errorForm('passreg');
     } else if ($$('#passreg1').val()==""){
-      // app.dialog.alert('Completa el campo del nombre, por favor');
       errorForm('passreg1');
     } else if ($$('#passreg1').val()!=$$('#passreg').val()){
-      // app.dialog.alert('Las contraseñas no son iguales')
       errorForm('passreg');
       errorForm('passreg1');
     } 
@@ -286,10 +296,11 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
         Siguiendo: ["ulii@ulii.com"],
         };
         colUsuarios.doc(email).set(datos);
-        $$('#Graciasreg2').removeClass('novisible');
-        $$('#Graciasreg2').addClass('visible');
-        $$('#btnreg2').removeClass('visible');
-        $$('#btnreg2').addClass('novisible');
+        mainView.router.navigate('/inicio/', { transition: 'f7-push' })
+        // $$('#Graciasreg2').removeClass('novisible');
+        // $$('#Graciasreg2').addClass('visible');
+        // $$('#btnreg2').removeClass('visible');
+        // $$('#btnreg2').addClass('novisible');
       })
       .catch(function(error) {
       // Handle Errors here.
