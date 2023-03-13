@@ -297,10 +297,6 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
         };
         colUsuarios.doc(email).set(datos);
         mainView.router.navigate('/inicio/', { transition: 'f7-push' })
-        // $$('#Graciasreg2').removeClass('novisible');
-        // $$('#Graciasreg2').addClass('visible');
-        // $$('#btnreg2').removeClass('visible');
-        // $$('#btnreg2').addClass('novisible');
       })
       .catch(function(error) {
       // Handle Errors here.
