@@ -31,7 +31,7 @@
   width: 70%;
   margin: 2% 0.2% 2% 0;
   background-color: rgba(198, 224, 220, 0.4);
-  transition: all 0.4s ease-in-out;
+  transition: all 0.8s ease-in-out;
   transition-delay: 0.4s;
   justify-content: center;
   place-items: center;
@@ -39,12 +39,14 @@
 }
 #col1:hover {
   background-color: rgba(236, 228, 206, 0.8);
-  width: 70%;
   margin: 2% 2% 2% 2%;
   box-shadow: 0px 0px 12px 2px rgba(242, 212, 174, 0.8);
 }
-#col2#col1:hover {
-  width: 30%;
+.achicar-col {
+  width: 30% !important;
+}
+.agrandar-col {
+  width: 70% !important;
 }
 #div-front-page{
   display: flex;
@@ -71,6 +73,7 @@
   justify-content: center;
   transition: 0.8s all;
   cursor: pointer;
+  box-shadow: 0 5px 35px 0px rgba(0,0,0,0.2);
 }
 .achicar {
   width: 100%;
@@ -81,7 +84,7 @@
   height: 250px;
   width: 250px;
   border-radius: 75px;
-  background-color: rgba(244, 142, 120, 1);
+  background-color: rgba(248, 126, 98, 1);
 }
 .agrandar::after,
 .agrandar::before {
@@ -89,7 +92,7 @@
   transition: 0s all;
 }
 #uworldbook:hover {
-  box-shadow: 0 5px 35px 0px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 35px 0px rgba(36, 44, 12, 0.2);
 }
 #uworldbook:hover::before, 
 #uworldbook:hover::after {
@@ -102,6 +105,15 @@
   border-radius: 75px;
   z-index: -1;
   animation: 1s clockwise infinite;
+}
+
+#uworldbook.hide::after,
+#uworldbook.hide::before {
+  display: none;
+}
+#uworldbook.show::after,
+#uworldbook.show::before {
+  display: unset;
 }
 
 #uworldbook:hover:after {
@@ -187,8 +199,6 @@
   }
 }
 
-
-
 #div-about {
   width: 100%;
   display: flex;
@@ -199,7 +209,7 @@
   height: 100%;
 }
 .div-about-hidden {
-  height: 2%;
+  height: 0%;
 }
 .card-about {
   position: relative;
@@ -208,7 +218,7 @@
   object-fit: cover;
   height: 100%;
   background-color: rgba(198, 224, 220, 1);
-  transition: all 0.4s ease-in-out;
+  transition: all 1s ease-in-out;
   display: flex;
 }
 .card-about::before, 
@@ -257,25 +267,19 @@
 
 #col2 {
   transition: all 0.4s ease-in-out;
-  width: 30%;
+  /* width: 30%; */
   margin: 2% 0 2% 0;
   background-color: rgba(236, 228, 206, 0.2);
-  transition: all 0.6s cubic-bezier(0.6, -0.28, 0.74, 0.04);
+  transition: all 0.6s ease;
   transition-delay: 0.4s;
   overflow-y: auto;
 }
-#col2:hover {
-  background-color: rgba(236, 228, 206, 0.8);
-  width: 70%;
+#col2:hover { 
+  background-color: rgba(236, 228, 206, 0.8); 
+  /* width: 70%; */
   margin: 2% 2% 2% 2%;
   box-shadow: 0px 0px 12px 2px rgba(242, 212, 174, 0.8);
 }
-/* #col2:hover, #col2:focus {
-  background-color: rgba(236, 228, 206, 0.8);
-  width: 70%;
-  margin: 2% 2% 2% 2%;
-  box-shadow: 0px 0px 12px 2px rgba(242, 212, 174, 0.8);
-} */
 
 /* Div Sesion - Register Styles */
 
@@ -296,7 +300,9 @@
   transition: all 0.4s ease-in-out;
 }
 .div-sesion-agrandar {
-  height: 50%;
+  height: 40%;
+  width: 60%;
+  min-height: 400px;
 }
 .div-sesion-achicar {
   height: 10%;
@@ -313,7 +319,6 @@
   border: 2px solid gray;
   transition: all 0.2s ease-in-out;
   padding: 8%;
-  /* min-height: 250px; */
 }
 .box-form:hover::after {
   border: 2px solid transparent;
@@ -348,9 +353,6 @@
 .input-edit-log-in {
   visibility: hidden;
 }
-.input-edit::placeholder {
-  /* color: rgba(255, 255, 255, 0.4); */
-}
 .input-edit[type="password"], 
 .input-edit[type="text"] {
   margin: 2.90%;
@@ -379,8 +381,6 @@
   position: relative;
   width: 40%;
   min-width: 100px;
-  height: 20%;
-  margin: 8px;
   padding: 10px 20px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -428,7 +428,6 @@
 .div-tittle-card {
   min-height: 8%;
   max-height: 16%;
-  /* margin: 4% 30% 6% 6%; */
   line-height: 1;
   transition: all 1s ease-in-out;
 }
@@ -462,6 +461,29 @@
   border-right: 38px solid transparent;
   border-bottom: 38px solid black;
 }
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 90;
+  left: 0;
+  transition: left 0.4s ease-in-out;
+  top: 0;
+  background-color: rgb(192,174,132);
+  display: flex;
+  place-items: center;
+  justify-content: center;
+}
+#gifload {
+  width: 250px; 
+  height: 250px;
+  display: unset;
+}
+.gif-noload {
+  display: none;
+}
+
 /* -- -- -- --  */
 
 .Iniciopag {

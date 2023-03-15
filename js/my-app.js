@@ -177,6 +177,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
       errorForm('pass');
     } else {
       // usuario=$$('#user').val();
+      document.getElementById('div-gif').classList.replace('gif-noload', 'gif-load');
       email=$$('#emaillog').val();
       contraseña=$$('#pass').val();
       usuario=$$('#user').val();
@@ -233,10 +234,13 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   let uWorldBook = document.getElementById("uworldbook");
   uWorldBook.addEventListener('click', function() {
     if (divAbout.classList.contains("div-about-hidden")) {
-      uWorldBook.classList.replace('agrandar', 'achicar');
+      this.classList.replace('agrandar', 'achicar');
+      this.classList.replace('show', 'hide');
       divAbout.classList.replace('div-about-hidden', 'div-about-show');
     } else {
-      uWorldBook.classList.replace('achicar', 'agrandar');
+      this.classList.replace('achicar', 'agrandar');
+      this.classList.replace('hidde-pseudo', 'show-pseudo');
+      this.classList.replace('hide', 'show');
       divAbout.classList.replace('div-about-show', 'div-about-hidden')
     }
   });
@@ -252,19 +256,6 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     hiddeInput(inputSelectSignin);
   });
 
-  // if (inputSelect.length > 0) {
-  //   for(let i= 0; i <=inputSelect.length; i++ ){
-  //     inputSelect[i].addEventListener('focus', function(){
-  //       // let changeHover = document.querySelector("box-log-in");
-  //       // let changeOut = changeHover.querySelector(":not(:hover)::after");
-        
-  //       changeVisible(divBoxLogIn);
-  //       changeVisible(divBoxSignUp);
-  //     });
-  //   }
-  // }
-
-
   $$('#Registro1').on('click', function(){
     if ($$('#userreg').val()=="") {
       errorForm('userreg');
@@ -279,6 +270,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
       errorForm('passreg1');
     } 
     else {
+      document.getElementById('div-gif').classList.replace('gif-noload', 'gif-load');
       usuario=$$('#userreg').val();
       contraseña=$$('#passreg').val();
       email=$$('#emailreg').val();    
@@ -295,8 +287,10 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
         Cuenta: email,
         Siguiendo: ["ulii@ulii.com"],
         };
-        colUsuarios.doc(email).set(datos);
-        mainView.router.navigate('/inicio/', { transition: 'f7-push' })
+        colUsuarios.doc(email).set(datos)
+        .then(function() {
+          mainView.router.navigate('/inicio/', { transition: 'f7-push' });
+        });
       })
       .catch(function(error) {
       // Handle Errors here.
