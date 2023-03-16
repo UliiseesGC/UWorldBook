@@ -1,4 +1,12 @@
 var $$ = Dom7;
+var firebaseConfig = {
+  apiKey: "AIzaSyCG1JRuS8dnRWmBVWZMzZQORNEaPp6Fn_A",
+  authDomain: "uworldbook.firebaseapp.com",
+  projectId: "uworldbook",
+  storageBucket: "uworldbook.appspot.com",
+  messagingSenderId: "576283250693",
+  appId: "1:576283250693:web:2bb6b739bb96b78fa9cc6c",
+};
 var app = new Framework7({
     root: '#app',
     name: 'My App',  
@@ -16,10 +24,7 @@ var app = new Framework7({
       },
       {
         path: '/inicio/',
-        url: 'inicio.html',
-        options: {
-          transition: 'f7-push',
-        }
+        url: 'inicio.html'
       },
       {
         path: '/Tendencias/',
@@ -79,7 +84,6 @@ var db = firebase.firestore();
 var colUsuarios = db.collection("usuarios");
 var colLibros =db.collection("Libros");
 var colFeed = db.collection("feed");
-
 // var subcolCap= colLibros.collection('Capitulos')
 var arraycontenido=[];
 var suslibs=[];
@@ -127,47 +131,47 @@ var shares='';
 var todopers=[];
 var todopers2=[];
 var arraysiguiendo =[];
+
+// function autenticar () {
+//   firebase.auth().onAuthStateChanged((user) => {
+//     document.getElementById('div-gif').classList.replace('gif-noload', 'gif-load');
+//     if (user) {
+//       user.getIdToken().then(function(token) {
+//         localStorage.setItem('userToken', token);
+//         firebase.auth().currentUser.getIdToken(true).then(function(idToken){
+//         })
+//         .catch(function(error){
+  
+//         });
+//       })
+//       // mainView.router.navigate('/inicio/', { transition: 'f7-push' });
+//       document.getElementById('div-gif').classList.replace('gif-load', 'gif-noload');
+//     } else {
+//     }
+//   });
+// }
+
+var jwtt = localStorage.getItem('jwt');
 $$(document).on('deviceready', function() {
   console.log("Device is ready!");
+  
 });
 $$(document).on('page:init', function(e) {
-  console.log(e);
+  console.log(jwtt)
 })
-// INDEX FUNCTIONS
-function changeVisible(div) {
-  div.style.visibility = 'visible';
-  div.style.height = '70%';
-  return true;
-}
-function changeHiden(div) {
-  div.style.visibility = 'hidden';
-  div.style.height = '0%';
-  return true;
-}
-function errorForm(id){
-  div = document.getElementById(id);
-  div.style.backgroundColor = 'rgba(200, 0, 0, 0.4)';
-  div.style.borderRadius = '8px'
 
-  div.addEventListener("focus", function(){
-    div.style.backgroundColor = 'rgba(198, 224, 220, 0.4)';
-  });
-}
-function showInput(input){
-  for(let i= 0; i <= input.length; i++ ){
-    if (input[i]) {
-      input[i].style.visibility = 'visible';
-    }
+$$(document).on('page:beforein', '.page[data-name="index"]', function (e) {
+  if (jwt) {
+    mainView.router.navigate('/inicio/');
+  } else {
+    mainView.router.navigate('/index/');
   }
-}
-function hiddeInput(input){
-  for(let i= 0; i <= input.length; i++ ){
-    if (input[i]) {
-      input[i].style.visibility = 'hidden';
-    }
-  }
-}
+  firebase.auth().signInWithCustomToken(localStorage.getItem('jwt'));
+  
+});
+
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
+  console.log(mainView);
   $$('#ingreso').on('click', function(){
     if ($$('#user').val()=="") {
       errorForm('user');
@@ -181,26 +185,23 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
       email=$$('#emaillog').val();
       contraseña=$$('#pass').val();
       usuario=$$('#user').val();
-      firebase.auth().signInWithEmailAndPassword(email, contraseña)
-      .then(function(){
-        mainView.router.navigate('/inicio/', { transition: 'f7-push' })
-      })
-      .catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode == 'auth/user-not-found') {
-          alert('Usuario no encontrado.');
-        } else {
-          alert(errorMessage);
-        }
-        console.log(error);
-        })
+      loginWithEmailAndPassword(email, contraseña);
+      // firebase.auth().signInWithEmailAndPassword(email, contraseña)
+      // .then(function(userCredential){
+      //   const user = userCredential;
+      //   mainView.router.navigate('/inicio/', { transition: 'f7-push' })
+      // })
+      // .catch(function(error) {
+      //   var errorCode = error.code;
+      //   var errorMessage = error.message;
+      //   if (errorCode == 'auth/user-not-found') {
+      //     alert('Usuario no encontrado.');
+      //   } else {
+      //     alert(errorMessage);
+      //   }
+      //   })
      }
   })  
-  $$('#Registro').on('click', function(){
-    mainView.router.navigate('/Registro/', { transition: 'f7-push' });
-  });
-
   let divIniciarSesion = document.getElementById("iniciar-sesion");
   let divBoxLogIn= document.getElementById("box-log-in");
   let divRegistro = document.getElementById("registrarse");
@@ -208,7 +209,6 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   let divColumnLeft = document.getElementById("col1");
   let inputSelectLogin = document.getElementsByClassName("input-edit-log-in");
   let inputSelectSignin = document.getElementsByClassName("input-edit-sign-in");
-
 
   //Muestra u oculta el contenido de la columna de la derecha al hacer hover
   divIniciarSesion.addEventListener("mouseover", function(){
@@ -274,8 +274,6 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
       usuario=$$('#userreg').val();
       contraseña=$$('#passreg').val();
       email=$$('#emailreg').val();    
-      // console.log(usuario, contraseña, email);
-      console.log(contraseña, email);
       mainView.router.navigate('/Index/', { transition: 'f7-flip' });
       var email = email;
       var contraseña = contraseña;
@@ -301,7 +299,6 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
       } else {
       alert(errorMessage);
       }
-      console.log(error);
       })
     }
     })  
@@ -311,6 +308,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 })
 
 $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
+  console.log(isAuthenticated());
 
   $$('#inicio1').on('click', function(){
     mainView.router.navigate('/inicio/');
@@ -347,7 +345,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
       searchIn: '.item-title',
       on: {
         search(sb, query, previousQuery) {
-          console.log(query, previousQuery);
         }
       }
     });
@@ -381,13 +378,9 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
     querySnapshot.forEach(function(doc){
       var imagen='';
       imagen= doc.data().Img;
-      console.log(imagen);
-
       arrayseguidor= doc.data().Siguiendo;
       var sucuenta = doc.id;
-      console.log(arrayseguidor);
       var estoy= arrayseguidor.indexOf(email);
-      console.log(estoy);
       
       colFeed.where("Cuenta","==", sucuenta).get()
       .then(function(querySnapshot){
@@ -403,8 +396,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
           var selec= doc.data().fechaPublicacion;
           quienesmeg = doc.data().quienesmeg;
           nombre = doc.data().Nombre;
-          console.log(quienesmeg2)
-          console.log("autor : "+autor)
           // if (quienesmegg  == email)
           autor = autor.replace('@','');
           autor = autor.replace('.','');
@@ -432,7 +423,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
            `)
            if (quienesmeg.indexOf(email) >=0 ){
             borrarmg=quienesmeg2.indexOf(email);
-            console.log(borrarmg)
             $$('#libc'+selec).remove('<img id="libc'+selec+'" class="mgpost" src="img/libritocerrado.png" ></img>');
             $$('#mg'+selec).append('<img id="libc'+selec+'" class="mgpost"  src="img/libritoabierto.png" ></img>')
             }
@@ -441,7 +431,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
               $$('#libc'+selec).remove('<img id="libc'+selec+'" class="mgpost" src="img/libritocerrado.png" ></img>');
               $$('#mg'+selec).append('<img id="libc'+selec+'" class="mgpost" src="img/libritocerrado.png" ></img>');
             }
-            console.log(quienesmeg.indexOf(email));
                   
             // funcion para dar mg en el post de alguien
             $$('#mg'+selec).on('click',function(){
@@ -449,7 +438,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
               $$('#libc'+selec).remove('<img id="libc'+selec+'" class="mgpost" src="img/libritoabierto.png" ></img>');
               var id2=this.id;
               id = id2.replace('mg','');
-              console.log('mg seleccionado: '+ id);
               feedquien = $$('#n'+autor).html();
               colFeed.where("fechaPublicacion", "==", id).get()
               .then(function(querySnapshot){
@@ -473,7 +461,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
                   quienesmeg.splice(borrarmg, 1);
                   var lenght = quienesmeg.length;
                   var setWithMerge = colFeed.doc(id).set({Megustas: quienesmeg.length,}, {merge: true});
-                  console.log('cuanto tiene el lenght cuando eliminas: '+ lenght);
                   $$('#t'+selec).html('Megustas: '+ quienesmeg.length);
                 }
               })
@@ -489,11 +476,9 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
               // ¡Comentar!
               // </div>`)
       
-              console.log('hiciste click en: '+ id);
               colFeed.doc(id).collection('Comentarios').get()
               .then(function(querySnapshot){
                 querySnapshot.forEach(function(doc){
-                  console.log('cuantas veces se repite el comentario y en donde: ' + doc.data().Comentario);
                     $$('#cajacoment3').append(`
                     <div id="cajacoment2">
                       <div class="paletcolor2" id="cajacoment">
@@ -507,7 +492,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
                 })
               })
               // feedquien = $$('#n'+autor).html();
-              // console.log('este es a quien le comentas: '+feedquien);
               $$('#cajacoment2').remove();
             })
             // funcion para dejar de seguir
@@ -516,11 +500,8 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
       
             $$('#elim'+nombre).on('click',function(){
               $$('#quienseguirrr').remove();
-              console.log('entra en el onclick');
-              console.log(arraysiguiendo);
               id= this.id;
               id= id.replace('elim', '');
-              console.log(id);
               $$('#agperr').append(`
               <p id="quienseguirrr">`+id+`</p>
               `)
@@ -531,13 +512,9 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
                     elle= doc.data().Siguiendo;
                     id= doc.data().Cuenta;
                   })
-                  console.log(elle);
                   var estanoseguir= elle.indexOf(email);
-                  console.log('esta?: '+estanoseguir);
                   aliminar= elle[estanoseguir];
-                  console.log('este eliminas ', aliminar );
                   elle.splice(estanoseguir, 1);
-                  console.log(elle);
                   var setWithMerge = colUsuarios.doc(id).set({Siguiendo: elle,}, {merge: true}); 
                   $$('#elim'+nombre).remove();
                   mainView.router.navigate('/inicio/', {reloadCurrent: true})
@@ -546,7 +523,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
       
             })            
           } else if (estoy == -1) {
-            console.log('no toy')
           }
           })
         })
@@ -558,7 +534,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
   var quecomentas='';
   $$('#comentas').on('click',function(){
     quecomentas=$$('#comentar').val();
-    console.log('holaa apretas btn comentasr ' + quecomentas);
     datacoment= {
       Cuenta: email,
       Comentario: quecomentas,
@@ -587,13 +562,12 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
     await colUsuarios.get()
     .then(function(querySnapshot){
       querySnapshot.forEach(function(doc){
-        console.log("cuentas: " + doc.data().Nombre);
         todopers2.push(doc.data().Nombre);
         todopers = todopers2.filter((item,index) => { return todopers2.indexOf(item) === index} );
         busc();
     })
   })
-  .catch(function (error){console.log('uy algo paso, ' + error)} )
+  .catch(function (error){} )
  for (i=0; i<todopers.length; i++){
    $$('#buscarpers').append('<li class="item-content"><div class="item-inner"><div class="item-title"><a href="#" class="menu-item popover-open paletcolor2 text-color-black" data-view=".page-content" data-popover=".popo-seguir" id="leerpers'+i+'"><div class="menu-item-content">'+todopers[i]+'</div></a></div></div></li>');
    
@@ -602,7 +576,6 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
      id=this.id;
      var id2 = id.replace('leerpers', '');
      persona= todopers[id2];
-     console.log('id de la persona: '+ persona);
      $$('#agper').append('<p id="quienseguirr">'+ persona +'</p>');
 
       $$('#quienseguir').on('click',function(){
@@ -614,11 +587,9 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
             if (arraysiguiendo[0] == ""){
               arraysiguiendo= [];
             }
-            console.log(seguir)
             arraysiguiendo.push(email);
             arraysiguiendo = arraysiguiendo.filter((item,index) => { return arraysiguiendo.indexOf(item) === index} );
             var setWithMerge = colUsuarios.doc(seguir).set({Siguiendo: arraysiguiendo,}, {merge: true}); 
-            console.log('array de quienese seguis: ' + arraysiguiendo);
             mainView.router.navigate('/inicio/', {reloadCurrent: true})
           })
         })
@@ -702,21 +673,15 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
         $$('#libcc'+selec).remove('<img id="libcc'+selec+'" class="mgpost" src="img/libritoabierto.png" ></img>');
          var id2=this.id;
         id = id2.replace('mg','');
-        console.log('le das mg a: '+id)
         feedquien = $$('#n'+autor).html();
-
         colFeed.where("fechaPublicacion", "==", id).get()
         .then(function(querySnapshot){
           querySnapshot.forEach(function(doc){ 
             quienesmeg= doc.data().quienesmeg;
             Megustas= doc.data().Megustas;
-            console.log('esta? : ' +quienesmeg.indexOf(email) );
           })
           var borrarmg=quienesmeg.indexOf(email);
-          console.log('la posicion donde esta el que borras: '+ borrarmg);
-
           if (quienesmeg.indexOf(email)==-1){
-
             quienesmeg.push(email);
             quienesmeg = quienesmeg.filter((item,index ) =>{ return quienesmeg.indexOf(item) === index} );
             colFeed.doc(id).update({quienesmeg: firebase.firestore.FieldValue.arrayUnion(email)});
@@ -743,11 +708,9 @@ $$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
         var quienn='';
         id=this.id;
         id = id.replace('co','');
-        console.log('hiciste click en: '+ id);
         colFeed.doc(id).collection('Comentarios').get()
         .then(function(querySnapshot){
           querySnapshot.forEach(function(doc){
-            console.log('cuantas veces se repite el comentario y en donde: ' + doc.data().Comentario);
             $$('#cajacoment3').append(`
               <div id="cajacoment2">
                 <div class="paletcolor2" id="cajacoment">
@@ -786,8 +749,6 @@ $$('#comentas').on('click',function(){
   })
 })
 $$(document).on('page:init', '.page[data-name="Tendencias"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('Tendencias cargadas');
   $$('#inicio1').on('click', function(){
     mainView.router.navigate('/inicio/');
   })
@@ -814,17 +775,12 @@ $$(document).on('page:init', '.page[data-name="Tendencias"]', function (e) {
   })
 })
 $$(document).on('page:init', '.page[data-name="Leer"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('Tendencias cargadas');
   $$('#Volver').on('click', function(){
     mainView.router.navigate('/Buscar/');
   })
 })
 $$(document).on('page:init', '.page[data-name="Buscar2]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('Tendencias cargadas');
   mainView.router.navigate('/inicio/');
-
 })
 
 
@@ -836,7 +792,6 @@ $$(document).on('page:init', '.page[data-name="Buscar"]', function (e) {
       searchIn: '.item-title',
       on: {
         search(sb, query, previousQuery) {
-          console.log(query, previousQuery);
         }
       }
     });
@@ -844,9 +799,6 @@ $$(document).on('page:init', '.page[data-name="Buscar"]', function (e) {
   $$('#buscarlib').remove();
 
   $$('#buscadora').append('<ul id="buscarlib"> </ul>');
-
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('Buscar cargado');
   $$('#inicio1').on('click', function(){
     mainView.router.navigate('/inicio/');
   })
@@ -878,12 +830,11 @@ $$(document).on('page:init', '.page[data-name="Buscar"]', function (e) {
       await colLibros.where("Publico","==","si").get()
             .then(function(querySnapshot){
             querySnapshot.forEach(function(doc){
-              console.log("libros: " + doc.data().Libro);
               todolibs2.push(doc.data().Libro);
               todolibs = todolibs2.filter((item,index) => { return todolibs2.indexOf(item) === index} );
               })
             })
-          .catch(function (error){console.log('uy algo paso, ' + error)} )
+          .catch(function (error){} )
     // Se crea toda la lista de libros en la busqueda
     for (i=0; i<todolibs.length; i++){
       $$('#buscarlib').append('<li class="item-content"><div class="item-inner"><div class="item-title"><a href="#" class="menu-item paletcolor2 text-color-black" data-view=".page-content" id="leerbusc'+i+'"><div class="menu-item-content">'+todolibs2[i]+'</div></a></div></div></li>')    
@@ -911,17 +862,14 @@ $$(document).on('page:init', '.page[data-name="Buscar"]', function (e) {
               arraycaps2.push(agcap);
               arraycaps = arraycaps2.filter((item,index ) =>{ return arraycaps2.indexOf(item) === index} );
             })
-            console.log(arraycaps);
             for(o=0; o<arraycaps.length; o++){
               id= arraycaps[o];
-              console.log("capitulo 1: "+id[0] + arraycaps);
               colLibros.doc(aglib).collection('Capitulos').where("Cuenta", "==", autor).where("Libro", "==", aglib ).where("Cap", "==", id ).get()
               .then(function(querySnapshot){
                 querySnapshot.forEach(function(doc){
                   var arraycontenido2 =[];
                   arraycontenido.push(doc.data().Contenido);
                   arraycontenido = arraycontenido.filter((item,index ) =>{ return arraycontenido.indexOf(item) === index} );
-                  console.log("Array contenido + length: " + arraycontenido + arraycontenido.length);
                   $$('#lercap').html(doc.data().Contenido);
                 })
               })
@@ -942,8 +890,6 @@ $$(document).on('page:init', '.page[data-name="Buscar"]', function (e) {
   }
 })
 $$(document).on('page:init', '.page[data-name="Amigos"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('Amigos cargados');
   $$('#inicio1').on('click', function(){
     mainView.router.navigate('/inicio/');
   })
@@ -971,10 +917,6 @@ $$(document).on('page:init', '.page[data-name="Amigos"]', function (e) {
 
 })
 $$(document).on('page:init', '.page[data-name="Mensajeria"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('Mensajeria cargado');
-
-
   $$('#inicio1').on('click', function(){
     mainView.router.navigate('/inicio/');
   })
@@ -1002,8 +944,6 @@ $$(document).on('page:init', '.page[data-name="Mensajeria"]', function (e) {
 
 })
 $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('Perfil cargado');
 
   $$('#inicio1').on('click', function(){
     mainView.router.navigate('/inicio/');
@@ -1015,7 +955,6 @@ $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
   .then(function(querySnapshot){
     querySnapshot.forEach(function(doc){
       imagen= doc.data().Img;
-      console.log(imagen);
       $$('#clickimg').remove('<img id="clickimg" class="imgformaperfil" src="img/avatar1.jpg" ></img>');
       $$('#clickimg2').append('<img id="clickimg" class="imgformaperfil" '+imagen+' ></img>');
     })
@@ -1025,7 +964,6 @@ $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
     $$('#imgp'+i).on('click', function(){
       id=this.id;
       var id2= id.replace('imgp', '');
-      console.log(id);
       $$('#clickimg').remove('<img id="clickimg" class="imgformaperfil" src="img/avatar1.jpg" ></img>');
       var imagen= 'src="img/avatar'+id2+'.jpg"'
       var setWithMerge = colUsuarios.doc(email).set({Img: imagen ,}, {merge: true}); 
@@ -1034,7 +972,6 @@ $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
       .then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
           imagen= doc.data().Img;
-          console.log(imagen);
           $$('#clickimg').remove('<img id="clickimg" class="imgformaperfil" src="img/avatar1.jpg" ></img>');
           $$('#clickimg2').append('<img id="clickimg" class="imgformaperfil" '+imagen+' ></img>');
           mainView.router.navigate('/Perfil/', {reloadCurrent: true})
@@ -1047,7 +984,6 @@ $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
   var nombre = '';
   var libros = '';
   var aquienseguis = '';
-  console.log(email)
   colUsuarios.where("Cuenta","==", email).get()
   .then(function (querySnapshot){
     querySnapshot.forEach(function(doc){
@@ -1055,7 +991,6 @@ $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
         libros = doc.data().Libros;
         nombre = doc.data().Nombre;
         aquienseguis = doc.data().Siguiendo;
-       console.log(aquienseguis)
        $$('#tuemail').html('Tu email: ' + cuenta);
        $$('#tunom').html('Tu nombre: ' + nombre);
        $$('#tuslibros').html('Tus libros: ' + libros);
@@ -1065,7 +1000,6 @@ $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
            elle=[];
            id= this.id;
            id= id.replace('seguisa', '');
-           console.log(id);
            colUsuarios.where("Nombre","==", id).get()
            .then(function(querySnapshot){
              querySnapshot.forEach(function(doc){ 
@@ -1073,16 +1007,12 @@ $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
                id= doc.data().Cuenta;
              })
            })
-           .catch(function (error){console.log('uy algo paso, ' + error)} );
+           .catch(function (error){} );
        
              $$('#quienseguirrr').on('click',function(){
-               console.log(elle);
                var estanoseguir= elle.indexOf(email);
-               console.log('esta?: '+estanoseguir);
                aliminar= elle[estanoseguir];
-               console.log('este eliminas ', aliminar );
                elle.splice(estanoseguir, 1);
-               console.log(elle);
                var setWithMerge = colUsuarios.doc(id).set({Siguiendo: elle,}, {merge: true}); 
              })
              $$('#noseguirrr').on('click',function(){
@@ -1098,9 +1028,6 @@ $$(document).on('page:init', '.page[data-name="Perfil"]', function (e) {
 
 
 $$(document).on('page:init', '.page[data-name="Opciones"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('opciones listas');
-
   $$('#inicio1').on('click', function(){
     mainView.router.navigate('/inicio/');
   })
@@ -1108,7 +1035,6 @@ $$(document).on('page:init', '.page[data-name="Opciones"]', function (e) {
 })
 
 $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
-  console.log('crear cargado');
   colFeed.get()
   .then(function(querySnapshot){
     querySnapshot.forEach(function(doc){}
@@ -1153,7 +1079,6 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
         arraylibs2 = arraylibs.filter((item,index ) =>{ return arraylibs.indexOf(item) === index} )
       })
       // ESTE BLOQUE LO QUE HACE ES TRAER DE LA BBDD TODOS LOS LIBROS QUE UNO TENGA
-      // console.log("email: " +usuario);
     });
     for (i=0; i<arraylibs2.length; i++){        
       $$('#crearcard').append('<div class="card demo-card-header-pic"><div style="background-color: #282940;"class="card-header align-items-flex-end"></div><div class="card-content card-content-padding"><p id="desk'+i+'" class="date"></p><p id="b'+i+'"></p></div><div class="card-footer"><div id="e'+i+'" value="'+i+'" data-popup=".otropopup" class=" popup-open abrire button button-outline btn2"> Ver </div> <div id="l'+i+'"data-popup=".my-popup" class="popup-open button button-outline btn2"> + Cap </div><div id="p'+i+'"data-popover=".popover-about" class="button button-outline btn2 popover-open">public/priv</div></div>');
@@ -1179,7 +1104,6 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
         colLibros.doc(indice).collection('Capitulos').where("Cuenta", "==", email).where("Libro", "==", indice ).get()
         .then(function (querySnapshot){
           querySnapshot.forEach(function(doc) {
-            console.log("Capitulo: " + doc.data().Cap);
             arraycaps.push(doc.data().Cap);
             arraycaps2 = arraycaps.filter((item,index ) =>{ return arraycaps.indexOf(item) === index} );
             cont+=1;
@@ -1189,21 +1113,15 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
               id= this.id;
               var id2 = id.replace('ecap', '');
               var indice2 = arraycaps2[id2];
-              console.log(arraycaps2 + 'Apretaste el cap: '+ indice2 );
               agcap=indice2;
               $$('#estecap').html(agcap);
               $$('#borrarc').text('Borrar capitulo: '+agcap);
-              //
-
               colLibros.doc(indice).collection('Capitulos').where("Cuenta", "==", email).where("Libro", "==", indice ).where("Cap", "==", indice2).get()
               .then(function (querySnapshot){
                 querySnapshot.forEach(function(doc) {
-                  console.log("Capitulo: " + doc.data().Contenido);
                   pagina= doc.data().Contenido;
-                  console.log('esto es lo que vas a editar:  ' + pagina);
                   $$('#pageditt2').html(pagina);
                   paginaeditada= $$('#pageditt2').html();
-                  console.log('esto es lo que editas:  ' + paginaeditada);
 
                 })
 
@@ -1222,17 +1140,16 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
             })
           });
         })
-        .catch(function (error){console.log('uy algo paso, ' + error)} );
+        .catch(function (error){
+        } );
         $$('.opcap').remove();
         cont=-1;
-        console.log(aglib);
       })
       $$('#p'+i).on('click', function(){    
         id = this.id;
         var id2 = id.replace('p', '');
         indice = arraylibs2[id2];
         aglib=indice;
-        console.log('seleccionaste este id: '+ aglib);
         $$('#publiclib').html(aglib);
         $$('#publicsi').on('click',function(){
           datapublic={
@@ -1271,15 +1188,12 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
         var id2 = id.replace('l', '');
         indice = arraylibs2[id2];
         aglib=indice;
-        console.log('seleccionaste este id: '+ id + aglib);
         $$('#quelib3').text('Libro: '+ indice);
         $$('#agnuevoc').on('click', function(){
            nuevocap =$$('#quecap3').val();
            nuevocont =$$('#pageditt3').html();
-          console.log('asdafsd'+nuevocap + nuevocont);
           if (nuevocap == ''){
             app.dialog.alert('¡Ingresa un nombre para tu nuevo capitulo!')
-            console.log('escrito en el bloque blanco: '+ nuevocont);
           }else if (nuevocont == '<br>'){
             app.dialog.alert('¡Ingresa un contenido para tu capitulo!')
           }else{
@@ -1295,7 +1209,6 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
               mainView.router.navigate('/Tubiblioteca/', {reloadCurrent: true})
             })
             .catch(function(error){
-            console.log("uy, no se pudo " + error);
           })
           }
         })
@@ -1316,27 +1229,21 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
       noverdelete();
     })
     $$('#borrarc').on('click', function(){
-      console.log('Borrar capitulo: ' + agcap);
       if ($$('#estecap').html() == '' ) {
         app.dialog.alert('¡Selecciona el cap. a borrar!');
       }else {
         colLibros.doc(aglib).collection('Capitulos').doc(agcap).delete()
         .then(function(){
-          console.log('¡Listo!')
         })
         .catch(function(error){
-          console.error(error);
         })
       }
     })
     $$('#borrarl').on('click', function(){
-      console.log('Borrar libro: ' + aglib);
       colLibros.doc(aglib).delete()
       .then(function(){
-        console.log('¡Listo!')
       })
       .catch(function(error){
-        console.error(error);
       })
   
     })
@@ -1358,8 +1265,6 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
           Libro: aglib, 
           Cap: agcap,
           Contenido: paginaeditada,}
-          console.log('Esto le editas al capitulo : '+ paginaeditada);
-          console.log('Esto son los otros valores, cuenta : '+ email + ' Libro : ' + aglib + ' Cap : ' + agcap );
         var subcolCaps= colLibros.doc(aglib).collection('Capitulos').doc(agcap);      
         subcolCaps.set(datacap);
         app.dialog.alert('¡Listo!')
@@ -1404,8 +1309,6 @@ $$(document).on('page:init', '.page[data-name="Tubiblioteca"]', function (e) {
 
 
 $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
-  // Do something here when page with data-name="about" attribute loaded and initialized
-  console.log('crear cargado');
   $$("#btnc").on('click', function(){
     $$("btnc").addClass("item-selected");
     $$("#btnmis").removeClass("item-selected");
@@ -1455,10 +1358,8 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
       } else{
         pagina=$$('#pagcrea').html();
       }
-      console.log(' libro '+libs + '  ' + ' capitulos '+caps);
       $$('#quelib').append('Libro :'+ aglib);
       $$('#quecap').append('Capitulo :'+ caps);
-      // console.log(pagina);
       $$('#pre1').html(pagina);
     }
   })
@@ -1492,9 +1393,7 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
       else {
         $$('#vis').addClass('popup-open');
         agcap=$$('#nomcap').val();
-        // console.log(agcap , agcap2);
         esta = agcap2.indexOf(agcap);
-        // console.log(agcap2.indexOf(agcap));
         if (esta != -1 ){
           app.dialog.alert('El nombre: "'+ agcap +'" ya existe en tus capitulos')
         } else {
@@ -1514,7 +1413,6 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
     })
   $$('#lista').on('change', () =>{
     caps = parseInt($$('#lista').val());
-    console.log('opcion capitulo: ' + caps +'nombre del capitulo: ' + agcap);
     if ($$('#lista').val() == 0 || $$('#lista').val() =='') {
       $$('#vis').removeClass('popup-open');
     } else {
@@ -1524,9 +1422,7 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
 
   // AGREGAMOS EL LIBRO A LA BIBLIOTECA
   $$('#maspag').on('click',() =>{
-    console.log(libs);
     if (pagina == ' '){
-      console.log(pagina);
       app.dialog.alert('¡¡No hay nada escrito en la pagina!!')
     }else{
       libs=1;
@@ -1551,12 +1447,13 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
         subcolCaps.set(datacap)
       })
       .catch(function(error){
-        console.log("uy, no se pudo " + error);
       })
       var subcolCaps= colLibros.doc(aglib).collection('Capitulos').doc(agcap); 
       subcolCaps.update({pagina})
-      .then(() => {console.log('se actualizo a: ' + pagina)})
-      .catch(function (error){console.log('uy algo paso, ' + error)} )
+      .then(() => {
+      })
+      .catch(function (error){
+      } )
     }
     colUsuarios.doc(email).update({Libros : firebase.firestore.FieldValue.increment(1)});
   })
@@ -1579,7 +1476,6 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
       app.dialog.alert('Agrega un nombre a tu libro');}
       else {
         aglib=$$('#nomlib').val();
-        // console.log(aglib , aglib2);
         esta = aglib2.indexOf(aglib);
         if (esta != -1 ){
           app.dialog.alert('El nombre: "'+ aglib +'" ya existe en tus libros')
@@ -1594,7 +1490,6 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
     })
     $$('#lista4').on('change', () =>{
       libs = parseInt($$('#lista4').val());
-      console.log('opcion libro: ' + libs + 'nombre del libro: ' + aglib);
       if ($$('#lista4').val() == 0 || $$('#lista4').val() =='') {
         $$('#vis').removeClass('popup-open');
       }else {
@@ -1613,3 +1508,88 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
     $$('#pagcrea').html("");
   })
 })
+
+//FIREBASE FUNCTIONS
+function loginWithEmailAndPassword(email, contraseña){ 
+  return firebase.auth().signInWithEmailAndPassword(email, contraseña)
+  .then((userCredential)=> {
+    const user = userCredential.user;
+    return user.getIdToken().then((token)=> {
+      localStorage.setItem('jwt', token);
+      mainView.router.navigate('/inicio/', { transition: 'f7-push' });
+      return user;
+    });
+  });
+}
+
+function isAuthenticated(){
+  const jwt = localStorage.getItem('jwt');
+  return firebase.auth().currentUser && jwt && jwt.length  > 10;
+}
+
+function getCurrentJwt() {
+  return localStorage.getItem('jwt');
+}
+
+function logout() {
+  return firebase.auth().signOut()
+    .then(() => {
+      // Eliminar el token JWT del almacenamiento local del navegador
+      localStorage.removeItem('jwt');
+    });
+}
+
+function verificarTokenJWT(token) {
+  try {
+    // Verificar la validez del token JWT utilizando la clave secreta de Firebase
+    const decodedToken = jwt.verify(token, firebaseConfig.private_key, {
+      algorithms: ['RS256'],
+      audience: firebaseConfig.client_id,
+    });
+
+    // Si el token JWT es válido, devolver los datos del usuario
+    return decodedToken;
+  } catch (error) {
+    // Si el token JWT no es válido, devolver un error
+    throw new Error('Token JWT inválido');
+  }
+}
+
+
+// INDEX FUNCTIONS
+function changeVisible(div) {
+  div.style.visibility = 'visible';
+  div.style.height = '70%';
+  return true;
+}
+function changeHiden(div) {
+  div.style.visibility = 'hidden';
+  div.style.height = '0%';
+  return true;
+}
+function errorForm(id){
+  div = document.getElementById(id);
+  div.style.backgroundColor = 'rgba(200, 0, 0, 0.4)';
+  div.style.borderRadius = '8px'
+
+  div.addEventListener("focus", function(){
+    div.style.backgroundColor = 'rgba(198, 224, 220, 0.4)';
+  });
+}
+function showInput(input){
+  for(let i= 0; i <= input.length; i++ ){
+    if (input[i]) {
+      input[i].style.visibility = 'visible';
+    }
+  }
+}
+function hiddeInput(input){
+  for(let i= 0; i <= input.length; i++ ){
+    if (input[i]) {
+      input[i].style.visibility = 'hidden';
+    }
+  }
+}
+
+//GENERAL FUNCTIONS
+
