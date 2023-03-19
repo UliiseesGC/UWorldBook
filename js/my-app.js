@@ -128,7 +128,7 @@ $$(document).on('deviceready', function() {
 
 $$(document).on('page:init', function(e) {
   firebase.auth().onAuthStateChanged(function(user) {
-    if (!user) {
+    if (user) {
       // El usuario está autenticado
       mainView.router.navigate('/inicio/');
     } else {
