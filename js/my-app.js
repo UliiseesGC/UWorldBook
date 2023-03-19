@@ -69,7 +69,7 @@ var app = new Framework7({
     ]
   });
 
-var mainView = app.views.create('.view-main')ñ
+var mainView = app.views.create('.view-main');
 // VARIABLES DE CLOUD FIRESTORE
 var db = firebase.firestore();
 var colUsuarios = db.collection("usuarios");
@@ -128,7 +128,7 @@ $$(document).on('deviceready', function() {
 
 $$(document).on('page:init', function(e) {
   firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
+    if (!user) {
       // El usuario está autenticado
       mainView.router.navigate('/inicio/');
     } else {
@@ -139,7 +139,6 @@ $$(document).on('page:init', function(e) {
 })
 
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
-  // document.getElementById('div-gif').classList.replace('gif-load', 'gif-noload');
   $$('#ingreso').on('click', function(){
     if ($$('#emaillog').val()=="") {
       errorForm('emaillog');
