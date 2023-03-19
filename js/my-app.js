@@ -1,12 +1,4 @@
 var $$ = Dom7;
-var firebaseConfig = {
-  apiKey: "AIzaSyCG1JRuS8dnRWmBVWZMzZQORNEaPp6Fn_A",
-  authDomain: "uworldbook.firebaseapp.com",
-  projectId: "uworldbook",
-  storageBucket: "uworldbook.appspot.com",
-  messagingSenderId: "576283250693",
-  appId: "1:576283250693:web:2bb6b739bb96b78fa9cc6c",
-};
 var app = new Framework7({
     root: '#app',
     name: 'My App',  
@@ -77,8 +69,7 @@ var app = new Framework7({
     ]
   });
 
-var mainView = app.views.create('.view-main');
-
+var mainView = app.views.create('.view-main')ñ
 // VARIABLES DE CLOUD FIRESTORE
 var db = firebase.firestore();
 var colUsuarios = db.collection("usuarios");
@@ -132,74 +123,34 @@ var todopers=[];
 var todopers2=[];
 var arraysiguiendo =[];
 
-// function autenticar () {
-//   firebase.auth().onAuthStateChanged((user) => {
-//     document.getElementById('div-gif').classList.replace('gif-noload', 'gif-load');
-//     if (user) {
-//       user.getIdToken().then(function(token) {
-//         localStorage.setItem('userToken', token);
-//         firebase.auth().currentUser.getIdToken(true).then(function(idToken){
-//         })
-//         .catch(function(error){
-  
-//         });
-//       })
-//       // mainView.router.navigate('/inicio/', { transition: 'f7-push' });
-//       document.getElementById('div-gif').classList.replace('gif-load', 'gif-noload');
-//     } else {
-//     }
-//   });
-// }
-
-var jwtt = localStorage.getItem('jwt');
 $$(document).on('deviceready', function() {
-  console.log("Device is ready!");
-  
 });
+
 $$(document).on('page:init', function(e) {
-  console.log(jwtt)
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // El usuario está autenticado
+      mainView.router.navigate('/inicio/');
+    } else {
+      // El usuario no está autenticado
+      document.getElementById('div-gif').classList.replace('gif-load', 'gif-noload');
+    }
+  });
 })
 
-$$(document).on('page:beforein', '.page[data-name="index"]', function (e) {
-  if (jwt) {
-    mainView.router.navigate('/inicio/');
-  } else {
-    mainView.router.navigate('/index/');
-  }
-  firebase.auth().signInWithCustomToken(localStorage.getItem('jwt'));
-  
-});
-
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
-  console.log(mainView);
+  // document.getElementById('div-gif').classList.replace('gif-load', 'gif-noload');
   $$('#ingreso').on('click', function(){
-    if ($$('#user').val()=="") {
-      errorForm('user');
-    } else if ($$('#emaillog').val()=="") {
+    if ($$('#emaillog').val()=="") {
       errorForm('emaillog');
     } else if ($$('#pass').val()=="") {
       errorForm('pass');
     } else {
-      // usuario=$$('#user').val();
       document.getElementById('div-gif').classList.replace('gif-noload', 'gif-load');
       email=$$('#emaillog').val();
       contraseña=$$('#pass').val();
       usuario=$$('#user').val();
       loginWithEmailAndPassword(email, contraseña);
-      // firebase.auth().signInWithEmailAndPassword(email, contraseña)
-      // .then(function(userCredential){
-      //   const user = userCredential;
-      //   mainView.router.navigate('/inicio/', { transition: 'f7-push' })
-      // })
-      // .catch(function(error) {
-      //   var errorCode = error.code;
-      //   var errorMessage = error.message;
-      //   if (errorCode == 'auth/user-not-found') {
-      //     alert('Usuario no encontrado.');
-      //   } else {
-      //     alert(errorMessage);
-      //   }
-      //   })
      }
   })  
   let divIniciarSesion = document.getElementById("iniciar-sesion");
@@ -307,9 +258,17 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     })
 })
 
-$$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
-  console.log(isAuthenticated());
+$$('.page[data-name="inicio"]').on('page:beforein', function () {
+  // Si el usuario no está autenticado, redirige a la página de inicio
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (!user) {
+      // El usuario está autenticado
+      mainView.router.navigate('/index/');
+    } 
+  });
+});
 
+$$(document).on('page:init', '.page[data-name="inicio"]', function (e) {
   $$('#inicio1').on('click', function(){
     mainView.router.navigate('/inicio/');
   })
@@ -1509,51 +1468,6 @@ $$(document).on('page:init', '.page[data-name="Crear"]', function (e) {
   })
 })
 
-//FIREBASE FUNCTIONS
-function loginWithEmailAndPassword(email, contraseña){ 
-  return firebase.auth().signInWithEmailAndPassword(email, contraseña)
-  .then((userCredential)=> {
-    const user = userCredential.user;
-    return user.getIdToken().then((token)=> {
-      localStorage.setItem('jwt', token);
-      mainView.router.navigate('/inicio/', { transition: 'f7-push' });
-      return user;
-    });
-  });
-}
-
-function isAuthenticated(){
-  const jwt = localStorage.getItem('jwt');
-  return firebase.auth().currentUser && jwt && jwt.length  > 10;
-}
-
-function getCurrentJwt() {
-  return localStorage.getItem('jwt');
-}
-
-function logout() {
-  return firebase.auth().signOut()
-    .then(() => {
-      // Eliminar el token JWT del almacenamiento local del navegador
-      localStorage.removeItem('jwt');
-    });
-}
-
-function verificarTokenJWT(token) {
-  try {
-    // Verificar la validez del token JWT utilizando la clave secreta de Firebase
-    const decodedToken = jwt.verify(token, firebaseConfig.private_key, {
-      algorithms: ['RS256'],
-      audience: firebaseConfig.client_id,
-    });
-
-    // Si el token JWT es válido, devolver los datos del usuario
-    return decodedToken;
-  } catch (error) {
-    // Si el token JWT no es válido, devolver un error
-    throw new Error('Token JWT inválido');
-  }
-}
 
 
 // INDEX FUNCTIONS
@@ -1593,3 +1507,21 @@ function hiddeInput(input){
 
 //GENERAL FUNCTIONS
 
+//FIREBASE FUNCTIONS
+function loginWithEmailAndPassword(email, contraseña){ 
+  return firebase.auth().signInWithEmailAndPassword(email, contraseña)
+  .then( () => {
+    mainView.router.navigate('/inicio/', { transition: 'f7-push' });
+  })
+  .catch((err) => {
+    console.log(`Error de inicio de sesion: ${err}`);
+  });
+}
+
+function logout() {
+  return firebase.auth().signOut()
+    .then(() => {
+      // Eliminar el token JWT del almacenamiento local del navegador
+      localStorage.removeItem('jwt');
+    });
+}
